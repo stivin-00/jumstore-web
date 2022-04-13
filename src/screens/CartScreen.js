@@ -83,7 +83,7 @@ export default function CartScreen(props) {
                   </div>
                   </td>
                   <td>
-                  <div>${item.price}</div>
+                  <div>₦{item.price}</div>
                   </td>
                   <td>
                   <div>
@@ -150,7 +150,7 @@ export default function CartScreen(props) {
           <ul>
             <li>
               <h2>
-                Subtotal ({cartItems.reduce((a, c) => a + c.qty, 0)} items) : $
+                Subtotal ({cartItems.reduce((a, c) => a + c.qty, 0)} items) : ₦
                 {cartItems.reduce((a, c) => a + c.price * c.qty, 0)}
               </h2>
             </li>
