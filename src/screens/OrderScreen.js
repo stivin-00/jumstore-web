@@ -35,7 +35,7 @@ export default function OrderScreen(props) {
   useEffect(() => {
     console.log(orderDetails);
     const addPayPalScript = async () => {
-      const { data } = await Axios.get("/api/config/paypal");
+      const { data } = await Axios.get("https://jumstore-store.herokuapp.com/api/config/paypal");
       const script = document.createElement("script");
       script.type = "text/javascript";
       script.src = `https://www.paypal.com/sdk/js?client-id=${data}`;

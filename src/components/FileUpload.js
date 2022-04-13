@@ -30,7 +30,7 @@ const FileUpload = () => {
             console.log(user);
             axios
               .post(
-                `/api/uploads`,
+                `https://jumstore-store.herokuapp.com/api/uploads`,
                 { image: uri },
                 {
                   headers: {
@@ -62,7 +62,7 @@ const FileUpload = () => {
     // console.log("remove image", public_id);
     axios
       .post(
-        `http://localhost:5000/api/uploads/removeimage`,
+        `https://jumstore-store.herokuapp.com/api/uploads/removeimage`,
         { public_id },
         {
           headers: {

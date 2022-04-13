@@ -118,7 +118,7 @@ export default function ProductEditScreen(props) {
           (uri) => {
             console.log(uri);
             axios
-              .post(`/api/uploads`, { image: uri })
+              .post(`https://jumstore-store.herokuapp.com/api/uploads`, { image: uri })
               .then((res) => {
                 console.log("IMAGE UPLOAD RES DATA", res);
                 setLoadi(false);
@@ -140,7 +140,7 @@ export default function ProductEditScreen(props) {
     setLoadi(true);
     console.log("remove image", public_id);
     axios
-      .post(`http://localhost:5000/api/uploads/removeimage`, {
+      .post(`https://jumstore-store.herokuapp.com/api/uploads/removeimage`, {
         public_id,
       })
       .then((res) => {
