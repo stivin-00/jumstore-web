@@ -52,7 +52,7 @@ const Footer = () => {
 								<ul className="footer-links">
 									<li><Link to="/"><i className="fa"><FaMapMarkerAlt/></i>173 Ikeja city mall</Link></li>
 									<li><Link to="/"><i className="fa"><FaPhone/></i> +234 8123 583 317</Link></li>
-									<li><Link to="/"><i className="fa"><FaEnvelope/></i>ekeleagbakwuru9@gmail.com</Link></li>
+									<li><Link to="/"><i className="fa"><FaEnvelope/></i>jumoke1239@gmail.com</Link></li>
 								</ul>
 							</div>
 						</div>

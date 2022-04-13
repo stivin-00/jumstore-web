@@ -69,7 +69,7 @@ function App() {
               <i className="fa fa-bars" ></i>
             </button>
             <Link className="brand" to="/">
-              e-shop
+              jumstore
             </Link>
           </div>
           <div className="mini-close">
