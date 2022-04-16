@@ -1,21 +1,30 @@
 import React, { useEffect, useState } from "react";
+import Resizer from "react-image-file-resizer";
+import Alert from "../components/Alert";
 import { useDispatch, useSelector } from "react-redux";
 import Axios from "axios";
+import axios from "axios";
+
 import { detailsProduct, updateProduct } from "../actions/productActions";
 import LoadingBox from "../components/LoadingBox";
+import { Avatar, Badge } from "antd";
 import MessageBox from "../components/MessageBox";
 import { PRODUCT_UPDATE_RESET } from "../constants/productConstants";
 
-export default function ProductEditScreen(props) {
+export default function ProducCreateScreen(props) {
   const productId = props.match.params.id;
   const [name, setName] = useState("");
+  const [load, setLoad] = useState(false);
   const [price, setPrice] = useState("");
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState({});
   const [category, setCategory] = useState("");
   const [countInStock, setCountInStock] = useState("");
   const [brand, setBrand] = useState("");
   const [size, setSize] = useState("");
   const [description, setDescription] = useState("");
+  const [data, setData] = useState({});
+  const [loadi, setLoadi] = useState(false);
+  const [imag, setImag] = useState({});
 
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, product } = productDetails;
@@ -68,31 +77,90 @@ export default function ProductEditScreen(props) {
 
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
-  const uploadFileHandler = async (e) => {
-    const file = e.target.files[0];
-    const bodyFormData = new FormData();
-    bodyFormData.append("image", file);
-    setLoadingUpload(true);
-    try {
-      const { data } = await Axios.post("https://jumstore-store.herokuapp.com/api/uploads", bodyFormData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${userInfo.token}`,
-        },
-      });
-      setImage(data);
-      setLoadingUpload(false);
-    } catch (error) {
-      setErrorUpload(error.message);
-      setLoadingUpload(false);
+  // const uploadFileHandler = async (e) => {
+  //   const file = e.target.files[0];
+  //   const bodyFormData = new FormData();
+  //   bodyFormData.append("image", file);
+  //   setLoadingUpload(true);
+  //   console.log("formdata", bodyFormData);
+  //   try {
+  //     const { data } = await Axios.post("/api/uploads", file, {
+  //       headers: {
+  //         "Content-Type": "multipart/form-data",
+  //         Authorization: `Bearer ${userInfo.token}`,
+  //       },
+  //     });
+  //     console.log("data", data);
+  //     setImage(data);
+  //     setLoadingUpload(false);
+  //   } catch (error) {
+  //     setErrorUpload(error.message);
+  //     console.log("error", error);
+  //     setLoadingUpload(false);
+  //   }
+  // };
+  // file upload to cloudinary function
+  const fileUploadAndResize = (e) => {
+    console.log(e.target.files);
+    // resize
+    let file = e.target.files; // 3
+
+    if (file) {
+      setLoadi(true);
+      for (let i = 0; i < file.length; i++) {
+        Resizer.imageFileResizer(
+          file[i],
+          720,
+          720,
+          "JPEG",
+          1000,
+          0,
+          (uri) => {
+            console.log(uri);
+            axios
+              .post(`https://jumstore-store.herokuapp.com/api/uploads`, { image: uri })
+              .then((res) => {
+                console.log("IMAGE UPLOAD RES DATA", res);
+                setLoadi(false);
+                setImage(res.data);
+              })
+              .catch((err) => {
+                setLoadi(false);
+                console.log("CLOUDINARY UPLOAD ERR", err.response);
+              });
+          },
+          "base64"
+        );
+      }
     }
+    // send back to server to upload to cloudinary
+    // set url to images[] in the parent component state - ProductCreate
+  };
+  const handleImageRemove = (public_id) => {
+    setLoadi(true);
+    console.log("remove image", public_id);
+    axios
+      .post(`https://jumstore-store.herokuapp.com/api/uploads/removeimage`, {
+        public_id,
+      })
+      .then((res) => {
+        console.log("u didid it", res);
+        setLoadi(false);
+        setImage({});
+      });
+    console.log("removed", data);
+    // setData({});
+    // setImage({}).catch((err) => {
+    //   console.log(err);
+    //   setLoad(false);
+    // });
   };
 
   return (
     <div>
       <form className="form" onSubmit={submitHandler}>
         <div>
-          <h1>create Product {productId}</h1>
+          <h1>Create Product {productId}</h1>
         </div>
         {loadingUpdate && <LoadingBox></LoadingBox>}
         {errorUpdate && <MessageBox variant="danger">{errorUpdate}</MessageBox>}
@@ -122,48 +190,75 @@ export default function ProductEditScreen(props) {
                 onChange={(e) => setPrice(e.target.value)}
               ></input>
             </div>
-            <div>
+            {/* <div>
               <label htmlFor="image">Image</label>
               <input
                 id="image"
                 type="text"
+                disabled={true}
                 placeholder="Enter image"
                 value={image}
                 onChange={(e) => setImage(e.target.value)}
               ></input>
+            </div> */}
+            <div className="p-3">
+              {/* file upload to cloudinary is here */}
+
+              <div className="row">
+              {loadi && <LoadingBox></LoadingBox>}
+                {image && (
+                  <Badge
+                    count="X"
+                    key={imag.public_id}
+                    onClick={() => handleImageRemove(imag.public_id)}
+                    style={{ cursor: "pointer"}}
+                  >
+                    <Avatar
+                      
+                      src={image.url}
+                      size={50}
+                      shape="square"
+                      className="ml-3"
+                    />
+                  </Badge>
+                )}
+              </div>
+              <div className="row">
+                <label className="btn btn-primary">
+                  Choose File
+                  <input
+                    type="file"
+                    multiple
+                    hidden
+                    accept="images/*"
+                    onChange={fileUploadAndResize}
+                  />
+                </label>
+              </div>
+
+              {/* file upload to cloudinary ends here */}
             </div>
             <div>
-              <label htmlFor="imageFile">Image File</label>
-              <input
-                type="file"
-                id="imageFile"
-                label="Choose Image"
-                onChange={uploadFileHandler}
-              ></input>
-              {loadingUpload && <LoadingBox></LoadingBox>}
-              {errorUpload && (
-                <MessageBox variant="danger">{errorUpload}</MessageBox>
-              )}
-            </div>
-            <div>
-              <label>Choose the size of the t-shirt</label>
-              <select onChange={(e) => handleChange(e)}>
-                <option value="S">S</option>
-                <option value="M">M</option>
-                <option value="L">L</option>
-                <option value="XL">XL</option>
+              <label>select category</label>
+              <select onChange={(e) => setCategory(e.target.value)}>
+                <option value={category}>{category}</option>
+                <option value="fruits">fruits</option>
+                <option value="vegetables">vegetables</option>
+                <option value="snacks">snacks</option>
+                <option value="alcohol">alcohol</option>
+                <option value="provisions">provisions</option>
+                <option value="beverages">beverages</option>
+                <option value="baking">baking</option>
+                <option value="dairy">dairy</option>
+                <option value="condiments'">condiments'</option>
+                <option value="cans-&-jars">cans & jars</option>
+                <option value="back-to-school">back-to-school</option>
+                <option value="cleaning">cleaning</option>
+                <option value="cleaning">cleaning</option>
+                <option value="personal-care">personal care</option>
               </select>
             </div>
-            <div>
-              <label htmlFor="category">Category</label>
-              <input
-                id="category"
-                type="text"
-                placeholder="Enter category"
-                value={category}
-                onChange={(e) => setCategory(e.target.value)}
-              ></input>
-            </div>
+ 
             <div>
               <label htmlFor="brand">Brand</label>
               <input

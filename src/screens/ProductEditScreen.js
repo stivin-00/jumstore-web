@@ -244,7 +244,8 @@ export default function ProductEditScreen(props) {
                 <option value={category}>{category}</option>
                 <option value="fruits">fruits</option>
                 <option value="vegetables">vegetables</option>
-                <option value="snacks'">snacks</option>
+                <option value="snacks">snacks</option>
+                <option value="alcohol">alcohol</option>
                 <option value="provisions">provisions</option>
                 <option value="beverages">beverages</option>
                 <option value="baking">baking</option>
