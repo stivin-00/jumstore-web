@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import OverflowScrolling from "react-overflow-scrolling";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 import Product from "../components/Product";
@@ -36,10 +37,12 @@ export default function HomeScreen() {
               {products.length === 0 && (
                 <MessageBox>No Product Found</MessageBox>
               )}
-              <div className="produts-row">
-                {products.map((product) => (
-                  <Product key={product._id} product={product}></Product>
-                ))}
+              <div style={{ overflowX: "scroll", height: '150'}}>
+                <div className="produts-row">
+                  {products.map((product) => (
+                    <Product key={product._id} product={product}></Product>
+                  ))}
+                </div>
               </div>
             </>
           )}

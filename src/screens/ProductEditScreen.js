@@ -254,7 +254,6 @@ export default function ProductEditScreen(props) {
                 <option value="cans-&-jars">cans & jars</option>
                 <option value="back-to-school">back-to-school</option>
                 <option value="cleaning">cleaning</option>
-                <option value="cleaning">cleaning</option>
                 <option value="personal-care">personal care</option>
               </select>
             </div>

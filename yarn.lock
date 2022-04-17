@@ -9104,7 +9104,7 @@
     "kleur" "^3.0.3"
     "sisteransi" "^1.0.5"
 
-"prop-types@^15.0.0", "prop-types@^15.5.8", "prop-types@^15.6.2", "prop-types@^15.7.2", "prop-types@>=15":
+"prop-types@*", "prop-types@^15.0.0", "prop-types@^15.5.8", "prop-types@^15.6.2", "prop-types@^15.7.2", "prop-types@>=15":
   "integrity" "sha512-fDGekdaHh65eI3lMi5OnErU6a8Ighg2KjcjQxO7m8VHyWjcPyj5kiOgV1LQDOOOgVy3+5FgjXvdSSX7B8/5/4g=="
   "resolved" "https://registry.npmjs.org/prop-types/-/prop-types-15.8.0.tgz"
   "version" "15.8.0"
@@ -9674,6 +9674,13 @@
   dependencies:
     "prop-types" "^15.5.8"
 
+"react-easy-swipe@0.0.18":
+  "integrity" "sha512-IddCZANbT0qVbGFEihfWOkZb/rFpeA3VV87SNOOqPzmSZ93G0nDSyHD28zuGhYJilwEP33MqYv/dwo+zaZha3Q=="
+  "resolved" "https://registry.npmjs.org/react-easy-swipe/-/react-easy-swipe-0.0.18.tgz"
+  "version" "0.0.18"
+  dependencies:
+    "prop-types" "^15.5.8"
+
 "react-error-overlay@^6.0.7":
   "integrity" "sha512-mKR90fX7Pm5seCOfz8q9F+66VCc1PGsWSBxKbITjfKVQHMNF2zudxHnMdJiB1fRCb+XsbQV9sO9DCkgsMQgBIA=="
   "resolved" "https://registry.npmjs.org/react-error-overlay/-/react-error-overlay-6.0.10.tgz"
@@ -9725,6 +9732,13 @@
   "integrity" "sha512-aRGxDGP9VoLxcsaYvKWIW+LRrMOzz2eEcubTS4NvQPPugjk2VvMhow0wWTkSl7RxookomD1MwcP4l5UStg5ShQ=="
   "resolved" "https://registry.npmjs.org/react-load-script/-/react-load-script-0.0.6.tgz"
   "version" "0.0.6"
+
+"react-overflow-scrolling@^1.0.1":
+  "integrity" "sha512-EoLD0aNnCp53jKO9w7eCvrZr+sQ/QvfQezseCx9HCTSIBV6wx1NNimUpmcA8NPc+oYziMaQQat3LR6pV+f0Trw=="
+  "resolved" "https://registry.npmjs.org/react-overflow-scrolling/-/react-overflow-scrolling-1.0.1.tgz"
+  "version" "1.0.1"
+  dependencies:
+    "react-easy-swipe" "0.0.18"
 
 "react-paypal-button-v2@^2.6.2":
   "integrity" "sha512-Kt0QxWjZn+RnIbbFPHDfH8iHwMqe/jG5+SkKElEJ0Fg+CM9yeK37y8zQW97l5C9P9D1yPacW5YNAnuxmI9uS9w=="

@@ -83,7 +83,7 @@ export default function OrderScreen(props) {
         <div className="col-5">
           <ul>
             <li>
-              <div className="card card-body row">
+              <div className="card card-body">
                 <h2>Shipping</h2>
                 <p>
                   <strong>Method:</strong> {order.deliverytMethod} <br />
@@ -127,7 +127,7 @@ export default function OrderScreen(props) {
                       <div className="row">
                         <div>
                           <img
-                            src={item.image}
+                            src={item.image.url}
                             alt={item.name}
                             className="small"
                           ></img>

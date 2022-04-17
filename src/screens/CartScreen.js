@@ -36,7 +36,7 @@ export default function CartScreen(props) {
             Cart is empty. <Link to="/">Go Shopping</Link>
           </MessageBox>
         ) : (
-         <div style={{ overflowX: 'scrool'}}>
+         <div style={{ overflowX: 'scroll'}}>
           <table className="table">
             <thead>
               <tr>
@@ -53,7 +53,7 @@ export default function CartScreen(props) {
                   <td>
                   <div>
                     <img
-                      src={item.image}
+                      src={item.image.url}
                       alt={item.name}
                       className="small"
                     ></img>

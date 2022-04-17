@@ -142,6 +142,16 @@ function App() {
             <i className="fa fa-bars"></i>
           </button>
         </header>
+        {/* <div>
+          <ul className="row">
+            <li className="nav-item">snacks</li>
+            <li className="nav-item">snacks</li>
+            <li className="nav-item">snacks</li>
+            <li className="nav-item">snacks</li>
+            <li className="nav-item">snacks</li>
+            <li className="nav-item">snacks</li>
+          </ul>
+        </div> */}
         <aside className={sidebarIsOpen ? "open" : ""}>
           <ul className="categories">
             <li>
@@ -271,7 +281,22 @@ function App() {
             </li>
           </ul>
         </aside>
+
         <main>
+        <div className="navigation">
+          <ul className="row">
+            <li className="nav-item">snacks</li>
+            <li className="nav-item">fruits</li>
+            <li className="nav-item">provisions</li>
+            <li className="nav-item">beverages</li>
+            <li className="nav-item">baking</li>
+            <li className="nav-item">cleaning</li>
+            <li className="nav-item">condiments</li>
+            <li className="nav-item">alcohol</li>
+            <li className="nav-item">vegetables</li>
+            <li className="nav-item">dairy</li>
+          </ul>
+        </div>
           <Switch>
             <Route path="/cart/:id?" exact component={CartScreen}></Route>
             <Route path="/product/:id" component={ProductScreen} exact></Route>
