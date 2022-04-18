@@ -37,6 +37,7 @@ export default function OrderListScreen(props) {
       ) : error ? (
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
+        <div className="table-scroll">
         <table className="table">
           <thead>
             <tr>
@@ -84,6 +85,7 @@ export default function OrderListScreen(props) {
             ))}
           </tbody>
         </table>
+        </div>
       )}
     </div>
   );

@@ -23,6 +23,7 @@ export default function HomeScreen() {
   });
   return (
     <div className="home">
+
       <div className="feature">
         <div className="feature-top">
           <h2>Featured Products</h2>
@@ -37,7 +38,7 @@ export default function HomeScreen() {
               {products.length === 0 && (
                 <MessageBox>No Product Found</MessageBox>
               )}
-              <div style={{ overflowX: "scroll", height: '150'}}>
+              <div style={{ overflowX: "scroll", overflowY: 'hidden'}}>
                 <div className="produts-row">
                   {products.map((product) => (
                     <Product key={product._id} product={product}></Product>
@@ -48,6 +49,58 @@ export default function HomeScreen() {
           )}
         </div>
       </div>
+      <div className="feature">
+        <div className="feature-top">
+          <h2>Best Selling</h2>
+        </div>
+        <div className="feature-bottom ">
+          {loading ? (
+            <LoadingBox></LoadingBox>
+          ) : error ? (
+            <MessageBox variant="danger">{error}</MessageBox>
+          ) : (
+            <>
+              {products.length === 0 && (
+                <MessageBox>No Product Found</MessageBox>
+              )}
+              <div style={{ overflowX: "scroll", overflowY: 'hidden'}}>
+                <div className="produts-row">
+                  {products.reverse().map((product) => (
+                    <Product key={product._id} product={product}></Product>
+                  ))}
+                </div>
+              </div>
+            </>
+          )}
+        </div>
+      </div>
+
+      {/* <div className="feature">
+        <div className="feature-top">
+          <h2>Best Selling</h2>
+        </div>
+        <div className="feature-bottom ">
+          {loading ? (
+            <LoadingBox></LoadingBox>
+          ) : error ? (
+            <MessageBox variant="danger">{error}</MessageBox>
+          ) : (
+            <>
+              {products.length === 0 && (
+                <MessageBox>No Product Found</MessageBox>
+              )}
+              <div style={{ overflowX: "scroll"}}>
+                <div className="produts-row">
+                  {products.map((product) => (
+                    <Product key={product._id} product={product}></Product>
+                  ))}
+                </div>
+              </div>
+            </>
+          )}
+        </div>
+      </div> */}
+
     </div>
   );
 }
