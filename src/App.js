@@ -61,13 +61,13 @@ function App() {
       <div className="grid-container" style={{margin: '0'}}>
         <header className="row">
           <div>
-            <button
+            {/* <button
               type="button"
               className="open-sidebar"
               onClick={() => setSidebarIsOpen(true)}
             >
               <i className="fa fa-bars"></i>
-            </button>
+            </button> */}
             <Link className="brand" to="/">
               jumstore
             </Link>
@@ -402,7 +402,7 @@ function App() {
         <div>
           {userInfo && !userInfo.isAdmin && <ChatBox userInfo={userInfo} />}
         </div>
-        <Footer></Footer>
+        {/* <Footer></Footer> */}
       </div>
     </BrowserRouter>
   );

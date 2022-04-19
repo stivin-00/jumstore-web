@@ -24,7 +24,7 @@ export default function HomeScreen() {
   return (
     <div className="home">
 
-      <div className="feature">
+      {/* <div className="feature">
         <div className="feature-top">
           <h2>Featured Products</h2>
         </div>
@@ -73,7 +73,7 @@ export default function HomeScreen() {
             </>
           )}
         </div>
-      </div>
+      </div> */}
 
       {/* <div className="feature">
         <div className="feature-top">
