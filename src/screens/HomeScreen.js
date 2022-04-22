@@ -7,6 +7,8 @@ import MessageBox from "../components/MessageBox";
 import { useDispatch, useSelector } from "react-redux";
 import { listProducts } from "../actions/productActions";
 import { Link } from "react-router-dom";
+import Hero from "../components/Hero";
+import About from "../components/About";
 
 export default function HomeScreen() {
   const dispatch = useDispatch();
@@ -22,8 +24,8 @@ export default function HomeScreen() {
   });
   return (
     <div className="home">
-
-      {/* <div className="feature">
+      <Hero/>
+      <div className="feature">
         <div className="feature-top">
           <h2>Featured Products</h2>
         </div>
@@ -62,7 +64,7 @@ export default function HomeScreen() {
               {products.length === 0 && (
                 <MessageBox>No Product Found</MessageBox>
               )}
-              <div style={{ overflowX: "scroll", overflowY: 'hidden'}}>
+              <div style={{ overflowX: "scroll", overflowY: 'hidden', borderRadius: '0 0 10 10'}}>
                 <div className="produts-row">
                   {products.reverse().map((product) => (
                     <Product key={product._id} product={product}></Product>
@@ -72,7 +74,7 @@ export default function HomeScreen() {
             </>
           )}
         </div>
-      </div> */}
+      </div>
 
       {/* <div className="feature">
         <div className="feature-top">
@@ -99,6 +101,7 @@ export default function HomeScreen() {
           )}
         </div>
       </div> */}
+      <About/>
 
     </div>
   );

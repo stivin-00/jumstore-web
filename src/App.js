@@ -402,7 +402,7 @@ function App() {
         <div>
           {userInfo && !userInfo.isAdmin && <ChatBox userInfo={userInfo} />}
         </div>
-        {/* <Footer></Footer> */}
+        <Footer></Footer>
       </div>
     </BrowserRouter>
   );
