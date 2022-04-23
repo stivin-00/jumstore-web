@@ -51,7 +51,7 @@ main {
 }
 .navigation ul {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 }
 .nav-item {
   display: flex;
@@ -644,7 +644,10 @@ button.close-sidebar {
 .filteropen {
   display: block;
 }
-
+.order-filter{
+  padding-bottom: 1rem;
+  border-bottom: 5px solid #eee;
+}
 /* pages */
 
 /* home */
@@ -760,7 +763,9 @@ button.close-sidebar {
   padding: 1rem;
   border-radius: 5px;
 }
-
+.foot-container{
+  margin-top: 10rem;
+}
 
 
 

@@ -57,6 +57,7 @@ export default function ProductEditScreen(props) {
   }, [product, dispatch, productId, successUpdate, props.history]);
   const submitHandler = (e) => {
     e.preventDefault();
+    console.log('hello')
     // TODO: dispatch update product
     dispatch(
       updateProduct({
@@ -301,7 +302,7 @@ export default function ProductEditScreen(props) {
             </div>
             <div>
               <label></label>
-              <button className="primary" type="submit">
+              <button className="primary" type="submit" >
                 Update
               </button>
             </div>

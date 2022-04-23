@@ -57,6 +57,7 @@ export default function ProducCreateScreen(props) {
   }, [product, dispatch, productId, successUpdate, props.history]);
   const submitHandler = (e) => {
     e.preventDefault();
+    console.log('hello')
     // TODO: dispatch update product
     dispatch(
       updateProduct({

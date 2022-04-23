@@ -1,24 +1,23 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Link, useParams } from 'react-router-dom';
-import { listProducts } from '../actions/productActions';
-import LoadingBox from '../components/LoadingBox';
-import MessageBox from '../components/MessageBox';
-import Product from '../components/Product';
-import Rating from '../components/Rating';
-import { prices, ratings } from '../utils';
-import {FaArrowDown,FaArrowUp } from 'react-icons/fa';
-
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useParams } from "react-router-dom";
+import { listProducts } from "../actions/productActions";
+import LoadingBox from "../components/LoadingBox";
+import MessageBox from "../components/MessageBox";
+import Product from "../components/Product";
+import Rating from "../components/Rating";
+import { prices, ratings } from "../utils";
+import { FaArrowDown, FaArrowUp } from "react-icons/fa";
 
 export default function SearchScreen(props) {
   const [filterIsOpen, setFilterIsOpen] = useState(false);
   const {
-    name = 'all',
-    category = 'all',
+    name = "all",
+    category = "all",
     min = 0,
     max = 0,
     rating = 0,
-    order = 'newest',
+    order = "newest",
     pageNumber = 1,
   } = useParams();
   const dispatch = useDispatch();
@@ -35,8 +34,8 @@ export default function SearchScreen(props) {
     dispatch(
       listProducts({
         pageNumber,
-        name: name !== 'all' ? name : '',
-        category: category !== 'all' ? category : '',
+        name: name !== "all" ? name : "",
+        category: category !== "all" ? category : "",
         min,
         max,
         rating,
@@ -56,35 +55,12 @@ export default function SearchScreen(props) {
     return `/search/category/${filterCategory}/name/${filterName}/min/${filterMin}/max/${filterMax}/rating/${filterRating}/order/${sortOrder}/pageNumber/${filterPage}`;
   };
   return (
-    <div style={{ background: '#eee'}}>
-      {/* <div className="row heer" >
-        {loading ? (
-          <LoadingBox></LoadingBox>
-        ) : error ? (
-          <MessageBox variant="danger">{error}</MessageBox>
-        ) : (
-          <div>{products.length} Results</div>
-        )}
-        <div>
-          Sort by{' '}
-          <select
-            value={order}
-            onChange={(e) => {
-              props.history.push(getFilterUrl({ order: e.target.value }));
-            }}
-          >
-            <option value="newest">Newest Arrivals</option>
-            <option value="lowest">Price: Low to High</option>
-            <option value="highest">Price: High to Low</option>
-            <option value="toprated">Avg. Customer Reviews</option>
-          </select>
-        </div>
-      </div> */}
-      <div className="row top" style={{width: '98vw'}} >
-        <div className="col-1 heer mini-close" style={{ background: 'white'}}>
+    <div style={{ background: "#eee" }}>
+      <div className="row top" style={{ width: "98vw" }}>
+        <div className="col-1 heer mini-close" style={{ background: "white" }}>
           <h3 className="department">Filter</h3>
           <hr></hr>
-          <div >
+          <div>
             {loadingCategories ? (
               <LoadingBox></LoadingBox>
             ) : errorCategories ? (
@@ -93,8 +69,8 @@ export default function SearchScreen(props) {
               <ul>
                 <li>
                   <Link
-                    className={'all' === category ? 'active' : ''}
-                    to={getFilterUrl({ category: 'all' })}
+                    className={"all" === category ? "active" : ""}
+                    to={getFilterUrl({ category: "all" })}
                   >
                     Category
                   </Link>
@@ -102,7 +78,7 @@ export default function SearchScreen(props) {
                 {categories.map((c) => (
                   <li key={c}>
                     <Link
-                      className={c === category ? 'active' : ''}
+                      className={c === category ? "active" : ""}
                       to={getFilterUrl({ category: c })}
                     >
                       {c}
@@ -112,7 +88,7 @@ export default function SearchScreen(props) {
               </ul>
             )}
           </div>
-          <hr/>
+          <hr />
           <div>
             <h4>Price</h4>
             <ul>
@@ -121,7 +97,7 @@ export default function SearchScreen(props) {
                   <Link
                     to={getFilterUrl({ min: p.min, max: p.max })}
                     className={
-                      `${p.min}-${p.max}` === `${min}-${max}` ? 'active' : ''
+                      `${p.min}-${p.max}` === `${min}-${max}` ? "active" : ""
                     }
                   >
                     {p.name}
@@ -138,102 +114,94 @@ export default function SearchScreen(props) {
                 <li key={r.name}>
                   <Link
                     to={getFilterUrl({ rating: r.rating })}
-                    className={`${r.rating}` === `${rating}` ? 'active' : ''}
+                    className={`${r.rating}` === `${rating}` ? "active" : ""}
                   >
-                    <Rating caption={' & up'} rating={r.rating}></Rating>
+                    <Rating caption={" & up"} rating={r.rating}></Rating>
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
-    
         </div>
 
-
-
-
-
-        <div className="col-1 heer max-close" style={{ background: 'white',}}>
-          <div className="row" style={{width: 'auto'}}>
-         <h3 className="department">Filter</h3>
-         <div onClick={() => setFilterIsOpen(!filterIsOpen)}>{filterIsOpen ? (<FaArrowUp/>) : (<FaArrowDown/>)}</div>
-         </div>
+        <div className="col-1 heer max-close" style={{ background: "white" }}>
+          <div className="row" style={{ width: "auto" }}>
+            <h3 className="department">Filter</h3>
+            <div onClick={() => setFilterIsOpen(!filterIsOpen)}>
+              {filterIsOpen ? <FaArrowUp /> : <FaArrowDown />}
+            </div>
+          </div>
           <hr></hr>
-          <div className={filterIsOpen? 'filteropen' : 'filter'}>
-          <div >
-            {loadingCategories ? (
-              <LoadingBox></LoadingBox>
-            ) : errorCategories ? (
-              <MessageBox variant="danger">{errorCategories}</MessageBox>
-            ) : (
-              <ul>
-                <li>
-                  <Link
-                    className={'all' === category ? 'active' : ''}
-                    to={getFilterUrl({ category: 'all' })}
-                  >
-                    Category
-                  </Link>
-                </li>
-                {categories.map((c) => (
-                  <li key={c}>
+          <div className={filterIsOpen ? "filteropen" : "filter"}>
+            <div>
+              {loadingCategories ? (
+                <LoadingBox></LoadingBox>
+              ) : errorCategories ? (
+                <MessageBox variant="danger">{errorCategories}</MessageBox>
+              ) : (
+                <ul>
+                  <li>
                     <Link
-                      className={c === category ? 'active' : ''}
-                      to={getFilterUrl({ category: c })}
+                      className={"all" === category ? "active" : ""}
+                      to={getFilterUrl({ category: "all" })}
                     >
-                      {c}
+                      Category
+                    </Link>
+                  </li>
+                  {categories.map((c) => (
+                    <li key={c}>
+                      <Link
+                        className={c === category ? "active" : ""}
+                        to={getFilterUrl({ category: c })}
+                      >
+                        {c}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+            <hr />
+            <div>
+              <h4>Price</h4>
+              <ul>
+                {prices.map((p) => (
+                  <li key={p.name}>
+                    <Link
+                      to={getFilterUrl({ min: p.min, max: p.max })}
+                      className={
+                        `${p.min}-${p.max}` === `${min}-${max}` ? "active" : ""
+                      }
+                    >
+                      {p.name}
                     </Link>
                   </li>
                 ))}
               </ul>
-            )}
-          </div>
-          <hr/>
-          <div>
-            <h4>Price</h4>
-            <ul>
-              {prices.map((p) => (
-                <li key={p.name}>
-                  <Link
-                    to={getFilterUrl({ min: p.min, max: p.max })}
-                    className={
-                      `${p.min}-${p.max}` === `${min}-${max}` ? 'active' : ''
-                    }
-                  >
-                    {p.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <hr />
-          <div>
-            <h4>Avg. Customer Review</h4>
-            <ul>
-              {ratings.map((r) => (
-                <li key={r.name}>
-                  <Link
-                    to={getFilterUrl({ rating: r.rating })}
-                    className={`${r.rating}` === `${rating}` ? 'active' : ''}
-                  >
-                    <Rating caption={' & up'} rating={r.rating}></Rating>
-                  </Link>
-                </li>
-              ))}
-            </ul>
+            </div>
+            <hr />
+            <div>
+              <h4>Avg. Customer Review</h4>
+              <ul>
+                {ratings.map((r) => (
+                  <li key={r.name}>
+                    <Link
+                      to={getFilterUrl({ rating: r.rating })}
+                      className={`${r.rating}` === `${rating}` ? "active" : ""}
+                    >
+                      <Rating caption={" & up"} rating={r.rating}></Rating>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
-        </div>
 
-
-
-
-
-
-
-
-
-        <div className="col-3 heer" style={{ background: 'white', paddingTop: '26px'}}>
+        <div
+          className="col-3 heer"
+          style={{ background: "white", paddingTop: "26px" }}
+        >
           {loading ? (
             <LoadingBox></LoadingBox>
           ) : error ? (
@@ -244,51 +212,53 @@ export default function SearchScreen(props) {
                 <MessageBox>No Product Found</MessageBox>
               )}
               <div>
-              <div className="row" style={{width: 'auto'}} >
-        {loading ? (
-          <LoadingBox></LoadingBox>
-        ) : error ? (
-          <MessageBox variant="danger">{error}</MessageBox>
-        ) : (
-          <div>{products.length} Results</div>
-        )}
-        <div className="sort-by" >
-          Sort by{' '}
-          <select style={{width: '180px'}}
-            value={order}
-            onChange={(e) => {
-              props.history.push(getFilterUrl({ order: e.target.value }));
-            }}
-          >
-            <option value="newest">Newest Arrivals</option>
-            <option value="lowest">Price: Low to High</option>
-            <option value="highest">Price: High to Low</option>
-            <option value="toprated">Avg. Customer Reviews</option>
-          </select>
-        </div>
-      </div>
-              <div className="row center produts-row">
-                {products.map((product) => (
-                  <Product key={product._id} product={product}></Product>
-                ))}
-              </div>
-              <div className="row center pagination">
-                {[...Array(pages).keys()].map((x) => (
-                  <Link
-                    className={x + 1 === page ? 'active' : ''}
-                    key={x + 1}
-                    to={getFilterUrl({ page: x + 1 })}
-                  >
-                    {x + 1}
-                  </Link>
-                ))}
-              </div>
+                <div className="row order-filter" style={{ width: "auto" }}>
+                  {loading ? (
+                    <LoadingBox></LoadingBox>
+                  ) : error ? (
+                    <MessageBox variant="danger">{error}</MessageBox>
+                  ) : (
+                    <div>{products.length} Results</div>
+                  )}
+                  <div className="sort-by">
+                    Sort by{" "}
+                    <select
+                      style={{ width: "180px" }}
+                      value={order}
+                      onChange={(e) => {
+                        props.history.push(
+                          getFilterUrl({ order: e.target.value })
+                        );
+                      }}
+                    >
+                      <option value="newest">Newest Arrivals</option>
+                      <option value="lowest">Price: Low to High</option>
+                      <option value="highest">Price: High to Low</option>
+                      <option value="toprated">Avg. Customer Reviews</option>
+                    </select>
+                  </div>
+                </div>
+                <div className="row center produts-row">
+                  {products.map((product) => (
+                    <Product key={product._id} product={product}></Product>
+                  ))}
+                </div>
+                <div className="row center pagination">
+                  {[...Array(pages).keys()].map((x) => (
+                    <Link
+                      className={x + 1 === page ? "active" : ""}
+                      key={x + 1}
+                      to={getFilterUrl({ page: x + 1 })}
+                    >
+                      {x + 1}
+                    </Link>
+                  ))}
+                </div>
               </div>
             </>
           )}
         </div>
       </div>
-      </div>
-    
+    </div>
   );
 }

@@ -34,6 +34,7 @@ import SearchBoxs from "./components/SearchBoxs";
 import DashboardScreen from "./screens/DashboardScreen";
 import ErrorScreen from "./screens/ErrorScreen";
 import SupportScreen from "./screens/SupportScreen";
+import { categoriesList } from "./utils/MockData";
 
 function App() {
   const cart = useSelector((state) => state.cart);
@@ -58,7 +59,7 @@ function App() {
   }, [dispatch]);
   return (
     <BrowserRouter>
-      <div className="grid-container" style={{margin: '0'}}>
+      <div className="grid-container" style={{ margin: "0" }}>
         <header className="row">
           <div>
             {/* <button
@@ -283,20 +284,15 @@ function App() {
         </aside>
 
         <main>
-        <div className="navigation">
-          <ul className="row">
-            <li className="nav-item">snacks</li>
-            <li className="nav-item">fruits</li>
-            <li className="nav-item">provisions</li>
-            <li className="nav-item">beverages</li>
-            <li className="nav-item">baking</li>
-            <li className="nav-item">cleaning</li>
-            <li className="nav-item">condiments</li>
-            <li className="nav-item">alcohol</li>
-            <li className="nav-item">vegetables</li>
-            <li className="nav-item">dairy</li>
-          </ul>
-        </div>
+          <div className="navigation">
+            <ul className="row">
+              {categoriesList.map((items, index) => (
+                <Link key={index} to={`/search/category/${items.label}`}>
+                  <li className="nav-item">{items.label}</li>
+                </Link>
+              ))}
+            </ul>
+          </div>
           <Switch>
             <Route path="/cart/:id?" exact component={CartScreen}></Route>
             <Route path="/product/:id" component={ProductScreen} exact></Route>

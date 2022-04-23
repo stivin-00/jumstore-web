@@ -4,7 +4,7 @@ import {  FaTwitter, FaFacebookF, FaInstagram, FaPinterest, FaEnvelope , FaPhone
 
 const Footer = () => {
     return (
-        <div >
+        <div className='foot-container'>
 
 		<div id="newsletter" className="section">
 			
