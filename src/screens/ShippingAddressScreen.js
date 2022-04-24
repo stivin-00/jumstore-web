@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { saveShippingAddress } from '../actions/cartActions';
+import About from '../components/About';
 import CheckoutSteps from '../components/CheckoutSteps';
 
 export default function ShippingAddressScreen(props) {
@@ -141,6 +142,7 @@ export default function ShippingAddressScreen(props) {
           </button>
         </div>
       </form>
+      <About/>
     </div>
   );
 }

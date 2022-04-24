@@ -143,11 +143,11 @@ export const categoriesList = [
     // image: require('./images/clean.png'),
     // Icon: () => <IconGadget fill={appColors.primary} />,
   },
-  {
-    label: 'personal-care',
+  // {
+    // label: 'personal-care',
     // image: require('./images/personal.png'),
     // Icon: () => <IconGadget fill={appColors.primary} />,
-  },
+  // },
 ];
 export const topBrands = [
   {
