@@ -736,7 +736,7 @@ button.close-sidebar {
 }
 .banner-cat {
   position: absolute;
-  margin-left: 7rem;
+  margin-left: 5.5rem;
   transform: translateY(7rem);
   z-index: 4;
   font-size: 3rem;
@@ -942,7 +942,7 @@ button.close-sidebar {
     margin-left: 4rem;
     transform: translateY(3rem);
     z-index: 4;
-    font-size: 1.5rem;
+    font-size: 2rem;
     font-family: cursive;
     font-weight: 700;
   }
