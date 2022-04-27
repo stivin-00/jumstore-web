@@ -698,9 +698,15 @@ button.close-sidebar {
 }
 
 .li-banner {
-  background-color: #3b1369;
-  margin: 1rem;
-  border-radius: 5px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 1rem;
+  margin: 1rem 0rem;
+  border-radius: 4px;
+  position: relative;
+}
+.banner-li {
+  position: relative;
 }
 
 /* slider */
@@ -725,10 +731,29 @@ button.close-sidebar {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  margin-bottom: 1rem;
   align-items: center;
 }
+.banner-cat {
+  position: absolute;
+  margin-left: 7rem;
+  transform: translateY(7rem);
+  z-index: 4;
+  font-size: 3rem;
+  font-family: cursive;
+  font-weight: 700;
+}
 .banner-img {
-  width: 300px !important;
+  width: 15.5vw;
+  opacity: 0.9;
+  height: 200px;
+  transition: 0.2s all ease-in-out;
+  z-index: 4;
+}
+.banner-img:hover {
+  /* width: auto; */
+  opacity: 0.5;
+  transform: scale(1.03);
   height: 200px;
 }
 .single-slide {
@@ -814,14 +839,14 @@ button.close-sidebar {
     padding-left: 0.2rem;
   }
   .banner {
-    width: 40vw;
+    width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
   }
   .banner-img {
-    width: 43vw !important;
+    width: 20vw !important;
     height: 150px;
   }
   .single-slide {
@@ -829,7 +854,20 @@ button.close-sidebar {
     background-repeat: no-repeat;
     background-size: cover !important;
     border-radius: 5px;
-   
+  }
+  .banner-cat {
+    position: absolute;
+    margin-left: 3rem;
+    transform: translateY(4rem);
+    z-index: 4;
+    font-size: 2rem;
+    font-family: cursive;
+    font-weight: 700;
+  }
+  .banner-img:hover {
+    opacity: 0.5;
+    transform: none !important;
+    height: auto;
   }
 }
 
@@ -877,7 +915,6 @@ button.close-sidebar {
     background-repeat: no-repeat;
     background-size: cover !important;
     border-radius: 5px;
-    
   }
   .slider-with-banner {
     width: 94vw;
@@ -891,6 +928,28 @@ button.close-sidebar {
   }
   .banner-img {
     width: 42vw !important;
+    height: 100px;
+  }
+  .banner {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+  .banner-cat {
+    position: absolute;
+    margin-left: 4rem;
+    transform: translateY(3rem);
+    z-index: 4;
+    font-size: 1.5rem;
+    font-family: cursive;
+    font-weight: 700;
+  }
+  .banner-img:hover {
+    /* width: auto; */
+    opacity: 0.5;
+    transform: none !important;
     height: 100px;
   }
 }

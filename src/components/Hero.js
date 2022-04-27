@@ -2,23 +2,27 @@ import React from "react";
 import { Fade } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
 import { Link } from "react-router-dom";
-import bann1 from "../utils/images/gocerys.png";
-import bann2 from "../utils/images/jaconda-41.png";
+import Typewriter from "typewriter-effect";
 
 const Hero = () => {
   const fadeImages = [
     {
-      url: `https://res.cloudinary.com/dxjprordi/image/upload/v1649844598/sc5imxqzxpnfcwwqpd8j.jpg`,
+      url: `https://res.cloudinary.com/dxjprordi/image/upload/v1650977478/gxlwlzftn237v4al2pqm.jpg`,
       caption: "Adidas Fit Pant",
       link: "61dda52fd6f9088025fec628",
     },
     {
-      url: `https://res.cloudinary.com/dxjprordi/image/upload/v1650092920/jeptmrvprmcebnr9qhk2.jpg`,
+      url: `https://res.cloudinary.com/dxjprordi/image/upload/v1650977453/dt4i7kkmhito4qagxb6c.jpg`,
       caption: "Paraga 2016",
       link: "625a6b47711a43a26196730f",
     },
     {
-      url: `https://res.cloudinary.com/dxjprordi/image/upload/v1649840520/cpakvlugvsfzstugxzaz.jpg`,
+      url: `https://res.cloudinary.com/dxjprordi/image/upload/v1650977453/dt4i7kkmhito4qagxb6c.jpg`,
+      caption: "Hott Drone 11",
+      link: "6243ffdb8abf04a0900c5481",
+    },
+    {
+      url: `https://res.cloudinary.com/dxjprordi/image/upload/v1650977428/s8kjrgkjxw3bskykozxy.jpg`,
       caption: "Hott Drone 11",
       link: "6243ffdb8abf04a0900c5481",
     },
@@ -44,7 +48,6 @@ const Hero = () => {
                       backgroundImage: `url(${fadeImage.url})`,
                     }}
                   >
-
                     <div className="slider-content">
                       <h4>
                         Sale Offer <span>-20% Off</span> This Week
@@ -70,13 +73,71 @@ const Hero = () => {
         </div>
         <div className="banner">
           <div className="li-banner">
-            <Link to="/search/name">
-              <img src={bann1} alt="ii" className="banner-img" />
+            <Link to="/search/name" className="banner-li">
+              <h2 className="banner-cat" style={{color: '#cbc3e3'}}>
+                <Typewriter
+                  options={{
+                    strings: [" joggers", " joggers", " joggers"],
+                    autoStart: true,
+                    loop: true,
+                  }}
+                />
+              </h2>
+              <img
+                src="https://res.cloudinary.com/dxjprordi/image/upload/v1650979457/oetasimmfcbozfbjfd9f.jpg"
+                alt="ii"
+                className="banner-img"
+              />
+            </Link>
+            <Link to="/search/name" className="banner-li">
+              <h2 className="banner-cat" style={{color: '#cbc3e3'}}>
+                <Typewriter
+                  options={{
+                    strings: [" shirts", " shirts", " shirts"],
+                    autoStart: true,
+                    loop: true,
+                  }}
+                />
+              </h2>
+              <img
+                src="https://res.cloudinary.com/dxjprordi/image/upload/v1650979411/v5nahyssg4xipanssfuk.jpg"
+                alt="ii"
+                className="banner-img"
+              />
             </Link>
           </div>
           <div className="li-banner">
-            <Link to="/search/name">
-              <img src={bann2} alt="ii" className="banner-img"/>
+            <Link to="/search/name" className="banner-li">
+              <h2 className="banner-cat" style={{color: '#cbc3e3'}}>
+                <Typewriter
+                  options={{
+                    strings: [" caps", " caps", " caps"],
+                    autoStart: true,
+                    loop: true,
+                  }}
+                />
+              </h2>
+              <img
+                src="https://res.cloudinary.com/dxjprordi/image/upload/v1650979477/vg1jouuie230fdfldume.jpg"
+                alt="ii"
+                className="banner-img"
+              />
+            </Link>
+            <Link to="/search/name" className="banner-li">
+              <h2 className="banner-cat" style={{color: '#cbc3e3'}}>
+                <Typewriter
+                  options={{
+                    strings: [" shorts", " shorts", " shorts"],
+                    autoStart: true,
+                    loop: true,
+                  }}
+                />
+              </h2>
+              <img
+                src="https://res.cloudinary.com/dxjprordi/image/upload/v1650977517/qzjmiglm539nra4xndsr.jpg"
+                alt="ii"
+                className="banner-img"
+              />
             </Link>
           </div>
         </div>
