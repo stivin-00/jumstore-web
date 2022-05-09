@@ -1,6 +1,6 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import Rating from './Rating';
+import React from "react";
+import { Link } from "react-router-dom";
+import Rating from "./Rating";
 
 export default function Product(props) {
   const { product } = props;
@@ -11,7 +11,7 @@ export default function Product(props) {
       </Link>
       <div className="card-body">
         <Link to={`/product/${product._id}`}>
-          <h3>{product.name.substring(0,15)}</h3>
+          <h3>{product.name.substring(0, 15)}</h3>
         </Link>
         <Rating
           rating={product.rating}
@@ -19,8 +19,9 @@ export default function Product(props) {
         ></Rating>
         <div className="row">
           <div className="price">₦{product.price}</div>
-
         </div>
+
+        <p className="description">{product.description.substring(0, 40)}..</p>
       </div>
     </div>
   );
