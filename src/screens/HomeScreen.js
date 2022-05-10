@@ -89,9 +89,9 @@ export default function HomeScreen() {
           <h2>Fashion Style Guide</h2>
         </div>
         <div className="feature-bottom ">
-          <img
+          <img className='jumia-image'
             src="https://ng.jumia.is/cms/0-1-weekly-cps/0-2022/w20/Market-days/9-may/CB---Jewelries-Market-Day.jpg"
-            style={{ width: "97%", height: "auto", margin: "15px" }}
+            
           />
         </div>
       </div>

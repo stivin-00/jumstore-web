@@ -775,7 +775,7 @@ button.close-sidebar {
   display: flex;
   flex-direction: row;
   margin: 0.2rem;
-  margin-bottom: 1rem;
+  /* margin-bottom: 1rem; */
   border-radius: 5px;
   padding-top: 1rem;
   box-shadow: 1px 1px 18px -9px rgba(122, 41, 41, 0.71);
@@ -896,8 +896,23 @@ button.close-sidebar {
   border-radius: 5px;
   box-shadow: 1px 1px 18px -9px rgba(122, 41, 41, 0.71);
 }
+.jumia-image{
+  width: 97%;
+  height:auto;
+  margin: 15px;
+}
 
-
+@media only screen and (max-width: 950px){
+  .banner-cat {
+    position: absolute;
+    margin-left: 2rem;
+    transform: translateY(5rem);
+    z-index: 4;
+    font-size: 2rem;
+    font-family: cursive;
+    font-weight: 700;
+  }
+}
 
 
 
@@ -1041,10 +1056,12 @@ button.close-sidebar {
     margin-bottom: 1rem;
     border-radius: 5px;
     padding-top: 1rem;
+    padding-bottom: -1rem;
   }
   .banner-img {
     width: 42vw !important;
-    height: 100px;
+    height: 120px;
+    margin-bottom: -1rem;
   }
   .banner {
     width: 100%;
@@ -1075,5 +1092,10 @@ button.close-sidebar {
     font-size: 12px;
     padding: .5rem;
     font-weight: bold;
+  }
+  .jumia-image{
+    width: 94%;
+    height:auto;
+    margin: 12px;
   }
 }
