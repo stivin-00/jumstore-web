@@ -1068,4 +1068,12 @@ button.close-sidebar {
     transform: none !important;
     height: 100px;
   }
+  .checkout-steps > div {
+    border-top: 0.3rem #c0c0c0 solid;
+    color: #c0c0c0;
+    flex: 1;
+    font-size: 12px;
+    padding: .5rem;
+    font-weight: bold;
+  }
 }
