@@ -560,6 +560,12 @@ button.close-sidebar {
   animation: type 0.5s alternate infinite;
 }
 
+
+
+
+
+
+
 @keyframes type {
   from {
     box-shadow: inset -3px 0px 0px #888;
@@ -679,14 +685,15 @@ button.close-sidebar {
   display: flex;
   align-items: center;
   justify-content: left;
-  border-radius: 10px 10px 0 0;
-  background-color: rgb(62, 60, 60);
+  border-radius: 5px 5px 0 0;
+  background: #4a4a4a url(https://res.cloudinary.com/staging-konga-com/image/upload/f_auto,q_auto/assets/images/homepage/category_icons.png) no-repeat;
   /* width: 96vw; */
+
 }
 .feature-top h2 {
-  color: white;
+  color: #fff;
   margin-left: 2rem;
-  margin-top: 0.5rem;
+  margin-top: 1rem;
 }
 .feature-bottom {
   background-color: white;
@@ -702,6 +709,16 @@ button.close-sidebar {
   /* overflow-x: scroll;
   -webkit-overflow-scrolling: touch; */
 }
+.produts-all{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
 
 .li-banner {
   display: grid;
@@ -822,6 +839,32 @@ button.close-sidebar {
 .mini-close {
   display: block;
 }
+
+/* feature */
+.features{
+  width: 97vw;
+  display: grid;
+  margin-bottom: 2rem;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+.featrure{
+  background-color: #fff;
+  padding: 1rem .1rem 0rem .1rem ;
+  margin: 1rem;
+  display: flex;
+  flex-direction: row;
+  font-size: 2rem;
+  font-weight: bold;
+  align-items: center;
+  border-radius: 5px;
+  box-shadow: 1px 1px 18px -9px rgba(122, 41, 41, 0.71);
+}
+
+
+
+
+
+
 @media only screen and (max-width: 767px) {
   .mini-close {
     display: none;
@@ -838,6 +881,9 @@ button.close-sidebar {
     border-radius: 20px;
     width: 95vw;
     /* margin: 2rem; */
+  }
+  .features{
+    display: none;
   }
   .slider-with-banner {
     width: 95vw;
