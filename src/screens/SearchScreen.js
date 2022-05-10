@@ -56,7 +56,7 @@ export default function SearchScreen(props) {
   };
   return (
     <div style={{ background: "#eee" }}>
-      <div className="row top" style={{ width: "98vw" }}>
+      <div className="row top-search" style={{ width: "98vw" }}>
         <div className="col-1 heer mini-close" style={{ background: "white" }}>
           <h3 className="department">Filter</h3>
           <hr></hr>

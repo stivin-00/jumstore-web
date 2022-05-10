@@ -57,7 +57,7 @@ export default function ProducCreateScreen(props) {
   }, [product, dispatch, productId, successUpdate, props.history]);
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log('hello')
+    console.log("hello");
     // TODO: dispatch update product
     dispatch(
       updateProduct({
@@ -119,7 +119,9 @@ export default function ProducCreateScreen(props) {
           (uri) => {
             console.log(uri);
             axios
-              .post(`https://jumstore-store.herokuapp.com/api/uploads`, { image: uri })
+              .post(`https://jumstore-store.herokuapp.com/api/uploads`, {
+                image: uri,
+              })
               .then((res) => {
                 console.log("IMAGE UPLOAD RES DATA", res);
                 setLoadi(false);
@@ -204,37 +206,34 @@ export default function ProducCreateScreen(props) {
             </div> */}
             <div className="p-3">
               {/* file upload to cloudinary is here */}
-
-              <div className="row">
-              {loadi && <LoadingBox></LoadingBox>}
+              <label htmlFor="name">upload image</label>
+              <div className="row" style={{ border: "1.2px solid black", borderRadius: '5px'}}>
+                <div className="row">
+                  <label className="btn btn-primary">
+                    Choose File
+                    <input
+                      type="file"
+                      multiple
+                      hidden
+                      accept="images/*"
+                      onChange={fileUploadAndResize}
+                    />
+                  </label>
+                </div>
+                {loadi && <LoadingBox></LoadingBox>}
                 {image && (
                   <Badge
                     count="X"
                     key={imag.public_id}
                     onClick={() => handleImageRemove(imag.public_id)}
-                    style={{ cursor: "pointer"}}
+                    style={{ cursor: "pointer", width: "40px" }}
                   >
-                    <Avatar
-                      
+                    <img
                       src={image.url}
-                      size={50}
-                      shape="square"
-                      className="ml-3"
+                      style={{ width: "200px", height: "auto" }}
                     />
                   </Badge>
                 )}
-              </div>
-              <div className="row">
-                <label className="btn btn-primary">
-                  Choose File
-                  <input
-                    type="file"
-                    multiple
-                    hidden
-                    accept="images/*"
-                    onChange={fileUploadAndResize}
-                  />
-                </label>
               </div>
 
               {/* file upload to cloudinary ends here */}
@@ -243,23 +242,17 @@ export default function ProducCreateScreen(props) {
               <label>select category</label>
               <select onChange={(e) => setCategory(e.target.value)}>
                 <option value={category}>{category}</option>
-                <option value="fruits">fruits</option>
-                <option value="vegetables">vegetables</option>
-                <option value="snacks">snacks</option>
-                <option value="alcohol">alcohol</option>
-                <option value="provisions">provisions</option>
-                <option value="beverages">beverages</option>
-                <option value="baking">baking</option>
-                <option value="dairy">dairy</option>
-                <option value="condiments'">condiments'</option>
-                <option value="cans-&-jars">cans & jars</option>
-                <option value="back-to-school">back-to-school</option>
-                <option value="cleaning">cleaning</option>
-                <option value="cleaning">cleaning</option>
-                <option value="personal-care">personal care</option>
+                <option value="caps">caps</option>
+                <option value="tees">tees</option>
+                <option value="joggers">joggers</option>
+                <option value="jacket">jacket</option>
+                <option value="combat">combat</option>
+                <option value="shorts">shorts</option>
+                <option value="sweatshirt">sweatshirt</option>
+                <option value="hoodie">hoodie</option>
               </select>
             </div>
- 
+
             <div>
               <label htmlFor="brand">Brand</label>
               <input

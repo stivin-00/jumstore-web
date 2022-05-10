@@ -1,5 +1,4 @@
 import Axios from "axios";
-import { PayPalButton } from "react-paypal-button-v2";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -19,6 +18,7 @@ export default function OrderScreen(props) {
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
 
+  //order
   const orderPay = useSelector((state) => state.orderPay);
   const {
     loading: loadingPay,
@@ -35,7 +35,9 @@ export default function OrderScreen(props) {
   useEffect(() => {
     console.log(orderDetails);
     const addPayPalScript = async () => {
-      const { data } = await Axios.get("https://jumstore-store.herokuapp.com/api/config/paypal");
+      const { data } = await Axios.get(
+        "https://jumstore-store.herokuapp.com/api/config/paypal"
+      );
       const script = document.createElement("script");
       script.type = "text/javascript";
       script.src = `https://www.paypal.com/sdk/js?client-id=${data}`;
@@ -72,6 +74,7 @@ export default function OrderScreen(props) {
     dispatch(deliverOrder(order._id));
   };
 
+
   return loading ? (
     <LoadingBox></LoadingBox>
   ) : error ? (
@@ -79,8 +82,8 @@ export default function OrderScreen(props) {
   ) : (
     <div>
       <h1>Order {order._id}</h1>
-      <div className="row top">
-        <div className="col-5">
+      <div className="row top-order">
+        <div className="coll">
           <ul>
             <li>
               <div className="card card-body">
@@ -124,6 +127,7 @@ export default function OrderScreen(props) {
                 <ul>
                   {order.orderItems.map((item) => (
                     <li key={item.product}>
+                      <hr />
                       <div className="row">
                         <div>
                           <img
@@ -149,7 +153,7 @@ export default function OrderScreen(props) {
             </li>
           </ul>
         </div>
-        <div className="col-5">
+        <div className="coll">
           <div className="card card-body">
             <ul>
               <li>
@@ -228,7 +232,7 @@ export default function OrderScreen(props) {
                     className="primary block"
                     onClick={deliverHandler}
                   >
-                   Confirm Payment & Deliver Order
+                    Confirm Payment & Deliver Order
                   </button>
                 </li>
               )}

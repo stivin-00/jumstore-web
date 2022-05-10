@@ -1,16 +1,17 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { createOrder } from '../actions/orderActions';
-import CheckoutSteps from '../components/CheckoutSteps';
-import { ORDER_CREATE_RESET } from '../constants/orderConstants';
-import LoadingBox from '../components/LoadingBox';
-import MessageBox from '../components/MessageBox';
+import React, { useEffect, useState } from "react";
+import { PaystackButton } from "react-paystack";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { createOrder } from "../actions/orderActions";
+import CheckoutSteps from "../components/CheckoutSteps";
+import { ORDER_CREATE_RESET } from "../constants/orderConstants";
+import LoadingBox from "../components/LoadingBox";
+import MessageBox from "../components/MessageBox";
 
 export default function PlaceOrderScreen(props) {
   const cart = useSelector((state) => state.cart);
   if (!cart.paymentMethod) {
-    props.history.push('/payment');
+    props.history.push("/payment");
   }
   const orderCreate = useSelector((state) => state.orderCreate);
   const { loading, success, error, order } = orderCreate;
@@ -21,21 +22,61 @@ export default function PlaceOrderScreen(props) {
   cart.shippingPrice = cart.itemsPrice > 100 ? toPrice(0) : toPrice(10);
   cart.taxPrice = toPrice(0.15 * cart.itemsPrice);
   cart.totalPrice = cart.itemsPrice + cart.shippingPrice + cart.taxPrice;
+ const totalAmount =( cart.itemsPrice + cart.shippingPrice + cart.taxPrice) * 100;
   const dispatch = useDispatch();
   const placeOrderHandler = () => {
     dispatch(createOrder({ ...cart, orderItems: cart.cartItems }));
   };
+
+  //check pay option
+  const [payOption, setPayOption] = useState(false);
+  useEffect(() => {
+    if ((cart.paymentMethod = "Pay Now")) {
+      setPayOption(true);
+    } else {
+      setPayOption(false);
+    }
+  }, [cart.paymentMethod]);
+
   useEffect(() => {
     if (success) {
       props.history.push(`/order/${order._id}`);
       dispatch({ type: ORDER_CREATE_RESET });
     }
   }, [dispatch, order, props.history, success]);
+
+  //paystack starts
+  const config = {
+    reference: new Date().getTime().toString(),
+    email: "user@example.com",
+    amount: totalAmount.toFixed(0),
+    publicKey: "pk_live_265fed5585afd6975af072710503a8f9c385bef0",
+  };
+  const handlePaystackSuccessAction = (reference) => {
+    dispatch(createOrder({ ...cart, orderItems: cart.cartItems }));
+    console.log(reference);
+  };
+
+  // you can call this function anything
+  const handlePaystackCloseAction = () => {
+    // implementation for  whatever you want to do when the Paystack dialog closed.
+    console.log("closed");
+  };
+
+  const componentProps = {
+    ...config,
+    text: "Place order with card",
+    onSuccess: (reference) => handlePaystackSuccessAction(reference),
+    onClose: handlePaystackCloseAction,
+  };
+
+  //paystack ends
+
   return (
     <div>
       <CheckoutSteps step1 step2 step3 step4></CheckoutSteps>
-      <div className="row top">
-        <div className="col-2">
+      <div className="row top-order">
+        <div className="coll">
           <ul>
             <li>
               <div className="card card-body">
@@ -62,10 +103,11 @@ export default function PlaceOrderScreen(props) {
                 <ul>
                   {cart.cartItems.map((item) => (
                     <li key={item.product}>
+                      <hr></hr>
                       <div className="row">
                         <div>
                           <img
-                            src={item.image}
+                            src={item.image.url}
                             alt={item.name}
                             className="small"
                           ></img>
@@ -87,7 +129,7 @@ export default function PlaceOrderScreen(props) {
             </li>
           </ul>
         </div>
-        <div className="col-1">
+        <div className="coll">
           <div className="card card-body">
             <ul>
               <li>
@@ -122,14 +164,21 @@ export default function PlaceOrderScreen(props) {
                 </div>
               </li>
               <li>
-                <button
-                  type="button"
-                  onClick={placeOrderHandler}
-                  className="primary block"
-                  disabled={cart.cartItems.length === 0}
-                >
-                  Place Order
-                </button>
+                {payOption ? (
+                  <PaystackButton
+                    className="primary block"
+                    {...componentProps}
+                  />
+                ) : (
+                  <button
+                    type="button"
+                    onClick={placeOrderHandler}
+                    className="primary block"
+                    disabled={cart.cartItems.length === 0}
+                  >
+                    Place Order
+                  </button>
+                )}
               </li>
               {loading && <LoadingBox></LoadingBox>}
               {error && <MessageBox variant="danger">{error}</MessageBox>}
