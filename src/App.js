@@ -202,7 +202,7 @@ function App() {
               <div onClick={() => setMenubarIsOpen(false)}>
                 <Route
                   render={({ history }) => (
-                    <SearchBoxs history={history}></SearchBoxs>
+                    <SearchBox history={history}></SearchBox>
                   )}
                 ></Route>
               </div>
