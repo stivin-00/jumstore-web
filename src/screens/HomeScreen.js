@@ -44,12 +44,14 @@ export default function HomeScreen() {
               )}
               <div>
                 <Scrollbars
+                // style={{height: '265px'}}
+                className='product-overflow'
                   autoHide
                   autoHideTimeout={1000}
                   autoHideDuration={200}
-                  autoHeight
+                  // autoHeight
                   // autoHeightMin={0}
-                  // autoHeightMax={200}
+                  // autoHeightMax={400}
                   thumbMinSize={30}
                   universal={true}
                 >
@@ -81,12 +83,14 @@ export default function HomeScreen() {
               <div
               >
                 <Scrollbars
+                // style={{height: '265px'}}
+                className='product-overflow'
                   autoHide
                   autoHideTimeout={1000}
                   autoHideDuration={200}
-                  autoHeight
-                  autoHeightMin={0}
-                  autoHeightMax={200}
+                  // autoHeight
+                  // autoHeightMin={0}
+                  // autoHeightMax={400}
                   thumbMinSize={30}
                   universal={true}
                 >
