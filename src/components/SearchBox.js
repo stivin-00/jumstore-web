@@ -8,17 +8,17 @@ export default function SearchBox(props) {
   };
   return (
     <form className="search" onSubmit={submitHandler}>
-      <div className="row">
+      {/* <div className="row search-form"> */}
         <input
           type="text"
           name="q"
           id="q"
           onChange={(e) => setName(e.target.value)}
         ></input>
-        <button className="primary" type="submit" style={{marginRight: '-10px'}}>
+        <button className="" type="submit" style={{marginRight: '-10px', backgroundColor: '#4E0352', color: '#FFFF'}}>
           <i className="fa fa-search"></i>
         </button>
-      </div>
+      {/* </div> */}
     </form>
   );
 }

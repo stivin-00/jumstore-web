@@ -11,10 +11,12 @@
     "antd": "^4.19.5",
     "axios": "^0.20.0",
     "react": "^16.13.1",
+    "react-custom-scrollbars": "^4.2.1",
     "react-dom": "^16.13.1",
     "react-google-charts": "^3.0.15",
     "react-icons": "^4.3.1",
     "react-image-file-resizer": "^0.4.7",
+    "react-indiana-drag-scroll": "^2.1.0",
     "react-paypal-button-v2": "^2.6.2",
     "react-paystack": "^3.0.5",
     "react-redux": "^7.2.1",
@@ -29,7 +31,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "./node_modules/.bin/netlify-lambda serve src",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "eject": "react-scripts eject"
   },
