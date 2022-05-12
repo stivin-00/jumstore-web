@@ -31,7 +31,6 @@ const Hero = () => {
   const fadeProperties = {
     duration: 3000,
     pauseOnHover: true,
-    indicators: true,
   };
 
   return (

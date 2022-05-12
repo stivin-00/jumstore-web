@@ -37,8 +37,11 @@ import SupportScreen from "./screens/SupportScreen";
 import { categoriesList } from "./utils/MockData";
 import logo from "./utils/images/logo.png";
 import { FaShoppingCart } from "react-icons/fa";
+import { FaBars } from "react-icons/fa";
+import { GoPerson } from "react-icons/go";
+import { useHistory } from "react-router-dom";
 
-function App() {
+function App(props) {
   const cart = useSelector((state) => state.cart);
   const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
   const [menubarIsOpen, setMenubarIsOpen] = useState(false);
@@ -48,6 +51,16 @@ function App() {
   const dispatch = useDispatch();
   const signoutHandler = () => {
     dispatch(signout());
+  };
+  const history = useHistory();
+
+  const [cat, setCat] = useState("");
+
+  const [name, setName] = useState("");
+  const submitHandler = (e) => {
+    e.preventDefault();
+    console.log(name);
+    history.push(`/search/name/${name}`);
   };
 
   const productCategoryList = useSelector((state) => state.productCategoryList);
@@ -59,137 +72,202 @@ function App() {
   useEffect(() => {
     dispatch(listProductCategories());
   }, [dispatch]);
+
   return (
     <BrowserRouter>
       <div className="grid-container" style={{ margin: "0" }}>
         <header className="row" style={{ color: "#4E0352" }}>
-          <div>
-            {/* <button
+          <div className="first-header row">
+            <div>
+              {/* <button
               type="button"
               className="open-sidebar"
               onClick={() => setSidebarIsOpen(true)}
             >
               <i className="fa fa-bars"></i>
             </button> */}
-            <Link className="brand" to="/">
-              <img className="img-header" src={logo} alt="hi" />
-            </Link>
-          </div>
-          <div className="mini-close">
-            <Route
-              render={({ history }) => (
-                <SearchBox history={history}></SearchBox>
-              )}
-            ></Route>
-          </div>
-          <div className="mini-close">
-            <Link
-              to="/cart"
-              style={{
-                color: "#4E0352",
-                fontSize: "17px",
-                fontWeight: "bold",
-                background: "#FBD0D0",
-                padding: "10px",
-                borderRadius: "7px",
-              }}
-            >
-              <FaShoppingCart style={{paddingRight: "10px"}}/> 
-               Cart
-              {cartItems.length > 0 && (
-                <span className="badge">{cartItems.length}</span>
-              )}
-            </Link>
-            {userInfo ? (
-              <div className="dropdown">
+              <Link className="brand" to="/">
+                <img className="img-header" src={logo} alt="hi" />
+              </Link>
+            </div>
+            <div className="mini-close">
+              <Route
+                render={({ history }) => (
+                  <SearchBox history={history}></SearchBox>
+                )}
+              ></Route>
+            </div>
+            <div className="mini-close">
+              <Link
+                to="/cart"
+                style={{
+                  color: "#4E0352",
+                  fontSize: "17px",
+                  fontWeight: "bold",
+                  background: "#FBD0D0",
+                  padding: "10px",
+                  borderRadius: "7px",
+                }}
+              >
+                <FaShoppingCart style={{ paddingRight: "10px" }} />
+                Cart
+                {cartItems.length > 0 && (
+                  <sup className="badge">{cartItems.length}</sup>
+                )}
+              </Link>
+              {userInfo ? (
+                <div className="dropdown">
+                  <Link
+                    to="#"
+                    style={{
+                      color: "#4E0352",
+                      fontSize: "17px",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    {userInfo.name} <i className="fa fa-caret-down"></i>{" "}
+                  </Link>
+                  <ul className="dropdown-content">
+                    <li>
+                      <Link to="/profile">User Profile</Link>
+                    </li>
+                    <li>
+                      <Link to="/orderhistory">Order History</Link>
+                    </li>
+                    <li>
+                      <Link
+                        to="#signout"
+                        onClick={signoutHandler}
+                        style={{
+                          color: "#4E0352",
+                          fontSize: "17px",
+                          fontWeight: "bold",
+                        }}
+                      >
+                        Sign Out
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+              ) : (
                 <Link
-                  to="#"
+                  to="/signin"
                   style={{
                     color: "#4E0352",
                     fontSize: "17px",
                     fontWeight: "bold",
                   }}
                 >
-                  {userInfo.name} <i className="fa fa-caret-down"></i>{" "}
+                  Sign In
                 </Link>
-                <ul className="dropdown-content">
-                  <li>
-                    <Link to="/profile">User Profile</Link>
-                  </li>
-                  <li>
-                    <Link to="/orderhistory">Order History</Link>
-                  </li>
-                  <li>
-                    <Link
-                      to="#signout"
-                      onClick={signoutHandler}
-                      style={{
-                        color: "#4E0352",
-                        fontSize: "17px",
-                        fontWeight: "bold",
-                      }}
-                    >
-                      Sign Out
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-            ) : (
-              <Link
-                to="/signin"
+              )}
+
+              {userInfo && userInfo.isAdmin && (
+                <div className="dropdown">
+                  <Link
+                    to="#admin"
+                    style={{
+                      color: "#4E0352",
+                      fontSize: "17px",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    Admin <i className="fa fa-caret-down"></i>
+                  </Link>
+                  <ul className="dropdown-content">
+                    <li>
+                      <Link to="/dashboard">Dashboard</Link>
+                    </li>
+                    <li>
+                      <Link to="/productlist">Products</Link>
+                    </li>
+                    <li>
+                      <Link to="/orderlist">Orders</Link>
+                    </li>
+                    <li>
+                      <Link to="/userlist">Users</Link>
+                    </li>
+                    <li>
+                      <Link to="/support">support</Link>
+                    </li>
+                  </ul>
+                </div>
+              )}
+            </div>
+            <button
+              type="button"
+              className="open-sidebar max-close"
+              onClick={() => setMenubarIsOpen(!menubarIsOpen)}
+            >
+              <i
+                className="fa fa-bars"
                 style={{
                   color: "#4E0352",
                   fontSize: "17px",
                   fontWeight: "bold",
                 }}
-              >
-                Sign In
-              </Link>
-            )}
-
-            {userInfo && userInfo.isAdmin && (
-              <div className="dropdown">
-                <Link
-                  to="#admin"
-                  style={{
-                    color: "#4E0352",
-                    fontSize: "17px",
-                    fontWeight: "bold",
-                  }}
-                >
-                  Admin <i className="fa fa-caret-down"></i>
-                </Link>
-                <ul className="dropdown-content">
-                  <li>
-                    <Link to="/dashboard">Dashboard</Link>
-                  </li>
-                  <li>
-                    <Link to="/productlist">Products</Link>
-                  </li>
-                  <li>
-                    <Link to="/orderlist">Orders</Link>
-                  </li>
-                  <li>
-                    <Link to="/userlist">Users</Link>
-                  </li>
-                  <li>
-                    <Link to="/support">support</Link>
-                  </li>
-                </ul>
-              </div>
-            )}
+              ></i>
+            </button>
           </div>
-          <button
-            type="button"
-            className="open-sidebar max-close"
-            onClick={() => setMenubarIsOpen(!menubarIsOpen)}
-          >
-            <i
-              className="fa fa-bars"
-              style={{ color: "#4E0352", fontSize: "17px", fontWeight: "bold" }}
-            ></i>
-          </button>
+
+          {/* mobile header */}
+
+          <div className="second-header">
+            <div className="head">
+              <div className="head-header">
+                <div className="header-left">
+                  <FaBars
+                    style={{ marginBottom: "5px", marginRight: "12px" }}
+                    onClick={() => setMenubarIsOpen(!menubarIsOpen)}
+                  />
+                  <Link to="/">
+                    {" "}
+                    <img
+                      src={logo}
+                      alt="hi"
+                      style={{ height: "auto", width: "60px" }}
+                    />
+                  </Link>
+                </div>
+                <div className="header-right">
+                  <Link to="/profile">
+                    <GoPerson />
+                  </Link>
+                  <Link to="/cart">
+                    {" "}
+                    <FaShoppingCart />
+                    {cartItems.length > 0 && (
+                      <sup className="mobile-badge">{cartItems.length}</sup>
+                    )}
+                  </Link>
+                </div>
+              </div>
+              <Route
+                render={({ history }) => (
+                  <SearchBoxs history={history}></SearchBoxs>
+                )}
+              ></Route>
+              <div className="head-category">
+                {categoriesList.map((item, index) => (
+                  <Link
+                    className="header-cat-item"
+                    key={index}
+                    to={`/search/category/${item.label}`}
+                  >
+                    <img
+                      src={item.image}
+                      alt="logo"
+                      className="header-cat-img"
+                      style={{ height: "20px", width: "20px" }}
+                    />
+                    <p>{item.label}</p>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </div>
         </header>
+
         {/* <div>
           <ul className="row">
             <li className="nav-item">snacks</li>
@@ -200,43 +278,27 @@ function App() {
             <li className="nav-item">snacks</li>
           </ul>
         </div> */}
-        <aside className={sidebarIsOpen ? "open" : ""}>
-          <ul className="categories">
-            <li>
-              <strong>Categories</strong>
-              <button
-                onClick={() => setSidebarIsOpen(false)}
-                className="close-sidebar"
-                type="button"
-              >
-                <i className="fa fa-close"></i>
-              </button>
-            </li>
-            {loadingCategories ? (
-              <LoadingBox></LoadingBox>
-            ) : errorCategories ? (
-              <MessageBox variant="danger">{errorCategories}</MessageBox>
-            ) : (
-              categories.map((c) => (
-                <li key={c}>
-                  <Link
-                    to={`/search/category/${c}`}
-                    onClick={() => setSidebarIsOpen(false)}
-                  >
-                    {c}
-                  </Link>
-                </li>
-              ))
-            )}
-          </ul>
-        </aside>
+
         <aside
-          style={{ background: "#FFFF", fontSize: "14px", fontWeight: "bold" }}
+          style={{
+            background: "#fff",
+            fontSize: "14px",
+            fontWeight: "bold",
+            overflowY: "scroll",
+          }}
           className={menubarIsOpen ? "open" : ""}
         >
           <ul className="categories">
             <li>
-              <strong>menu</strong>
+              <strong
+                style={{
+                  color: "#4E0352",
+                  fontSize: "18px",
+                  fontWeight: "bold",
+                }}
+              >
+                menu
+              </strong>
               <button
                 onClick={() => setMenubarIsOpen(false)}
                 className="close-sidebar"
@@ -245,15 +307,10 @@ function App() {
                 <i className="fa fa-close"></i>
               </button>
             </li>
-            <li>
-              <div>
-                <Route
-                  render={({ history }) => (
-                    <SearchBoxs history={history}></SearchBoxs>
-                  )}
-                ></Route>
-              </div>
-            </li>
+            {/* <li>
+              <div></div>
+            </li> */}
+            <hr style={{ background: "#4E0352", fontSize: "1px" }} />
             <li>
               <div onClick={() => setMenubarIsOpen(false)}>
                 <Link
@@ -266,15 +323,16 @@ function App() {
                 >
                   Cart
                   {cartItems.length > 0 && (
-                    <span className="badge">{cartItems.length}</span>
+                    <sup className="badge">{cartItems.length}</sup>
                   )}
                 </Link>
               </div>
             </li>
+            <hr style={{ background: "#4E0352", fontSize: "1px" }} />
             <li>
               <div onClick={() => setMenubarIsOpen(false)}>
                 {userInfo ? (
-                  <div className="dropdown">
+                  <div className="">
                     <Link
                       to="#"
                       style={{
@@ -285,10 +343,7 @@ function App() {
                     >
                       {userInfo.name} <i className="fa fa-caret-down"></i>{" "}
                     </Link>
-                    <ul
-                      className="dropdown-contentx"
-                      onClick={() => setMenubarIsOpen(false)}
-                    >
+                    <ul className="" onClick={() => setMenubarIsOpen(false)}>
                       <li>
                         <Link to="/profile">User Profile</Link>
                       </li>
@@ -316,13 +371,14 @@ function App() {
                 )}
               </div>
             </li>
-            <li>
+            <hr style={{ background: "#4E0352", fontSize: "1px" }} />
+            {/* <li>
               <div onClick={() => setMenubarIsOpen(false)}></div>
-            </li>
+            </li> */}
             <li>
               <div onClick={() => setMenubarIsOpen(false)}>
                 {userInfo && userInfo.isAdmin && (
-                  <div className="dropdown">
+                  <div className="">
                     <Link
                       to="#admin"
                       style={{
@@ -333,10 +389,7 @@ function App() {
                     >
                       Admin <i className="fa fa-caret-down"></i>
                     </Link>
-                    <ul
-                      className="dropdown-contentx"
-                      onClick={() => setMenubarIsOpen(false)}
-                    >
+                    <ul className="" onClick={() => setMenubarIsOpen(false)}>
                       <li>
                         <Link to="/dashboard">Dashboard</Link>
                       </li>
@@ -349,14 +402,12 @@ function App() {
                       <li>
                         <Link to="/userlist">Users</Link>
                       </li>
-                      <li>
-                        <Link to="/support">support</Link>
-                      </li>
                     </ul>
                   </div>
                 )}
               </div>
             </li>
+            <hr style={{ background: "#4E0352", fontSize: "1px" }} />
           </ul>
         </aside>
 
@@ -364,8 +415,12 @@ function App() {
           <div className="navigation">
             <ul className="row">
               {categoriesList.map((items, index) => (
-                <Link key={index} to={`/search/category/${items.label}`}>
-                  <li className="nav-item">{items.label}</li>
+                <Link
+                  key={index}
+                  onClick={() => setCat(items.label)}
+                  to={`/search/category/${items.label}`}
+                >
+                  <li className={items.label === cat ? "active-link nav-item" : "nav-item"}>{items.label}</li>
                 </Link>
               ))}
             </ul>

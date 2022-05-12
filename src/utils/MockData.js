@@ -71,35 +71,35 @@ export const reviews = [
 export const categoriesList = [
   {
     label: "hoodie",
-    // image: require("./images/hood.jpeg"),
+    image: require("./images/hood.jpeg"),
   },
   {
     label: "tees",
-    // image: require("./images/tee.jpg"),
+    image: require("./images/tee.jpg"),
   },
   {
     label: "sweatshirt",
-    // image: require("./images/sweat.jpg"),
+    image: require("./images/sweat.jpg"),
   },
   {
     label: "caps",
-    // image: require("./images/cap.jpeg"),
+    image: require("./images/cap.jpeg"),
   },
   {
     label: "joggers",
-    // image: require("./images/jug.jpg"),
+    image: require("./images/jug.jpg"),
   },
   {
     label: "shorts",
-    // image: require("./images/shot.jpg"),
+    image: require("./images/shot.jpg"),
   },
   {
     label: "combat",
-    // image: require("./images/combat.jpg"),
+    image: require("./images/combat.jpg"),
   },
   {
     label: "jacket",
-    // image: require("./images/jacket.jpg"),
+    image: require("./images/jacket.jpg"),
   },
 ];
 export const topBrands = [
