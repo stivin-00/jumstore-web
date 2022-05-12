@@ -10,6 +10,7 @@ import LoadingBox from "../components/LoadingBox";
 import { Avatar, Badge } from "antd";
 import MessageBox from "../components/MessageBox";
 import { PRODUCT_UPDATE_RESET } from "../constants/productConstants";
+import About from "../components/About";
 
 export default function ProductEditScreen(props) {
   const productId = props.match.params.id;
@@ -307,6 +308,7 @@ export default function ProductEditScreen(props) {
           </>
         )}
       </form>
+      <About/>
     </div>
   );
 }
