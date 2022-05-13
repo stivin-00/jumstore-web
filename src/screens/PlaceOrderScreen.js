@@ -14,28 +14,90 @@ export default function PlaceOrderScreen(props) {
     props.history.push("/payment");
   }
   const orderCreate = useSelector((state) => state.orderCreate);
+  const userDetails = useSelector((state) => state.userSignin.userInfo);
   const { loading, success, error, order } = orderCreate;
   const toPrice = (num) => Number(num.toFixed(2)); // 5.123 => "5.12" => 5.12
   cart.itemsPrice = toPrice(
     cart.cartItems.reduce((a, c) => a + c.qty * c.price, 0)
   );
   cart.shippingPrice = cart.itemsPrice > 100 ? toPrice(0) : toPrice(10);
-  cart.taxPrice = toPrice(0.15 * cart.itemsPrice);
-  cart.totalPrice = cart.itemsPrice + cart.shippingPrice + cart.taxPrice;
- const totalAmount =( cart.itemsPrice + cart.shippingPrice + cart.taxPrice) * 100;
+  cart.taxPrice = toPrice(0.05 * cart.itemsPrice);
+  cart.totalPrice = cart.itemsPrice + cart.shippingPrice - cart.taxPrice;
+  const totalAmount =
+    (cart.itemsPrice + cart.shippingPrice - cart.taxPrice) * 100;
   const dispatch = useDispatch();
+
   const placeOrderHandler = () => {
-    dispatch(createOrder({ ...cart, orderItems: cart.cartItems }));
+    try {
+      let order = {
+        orderItems: cart.cartItems,
+        shippingAddress: cart.shippingAddress,
+        paymentMethod: cart.paymentMethod,
+        deliverytMethod: "Standard Delivery",
+        itemsPrice: cart.itemsPrice,
+        // shippingPrice: delivery,
+        taxPrice: cart.taxPrice,
+        isPaid: false,
+        totalPrice: totalAmount,
+        userEmail: userDetails.email,
+        userPhone: userDetails.phone,
+        userName: cart.shippingAddress.FullName,
+      };
+      dispatch(createOrder(order));
+      alert("success", "Your Order Placed Successfully");
+    } catch (error) {
+      alert("Oops !! Something went wrong !");
+      console.log(error);
+    }
+  };
+  const placePaidOrderHandler = () => {
+    try {
+      let order = {
+        orderItems: cart.cartItems,
+        shippingAddress: cart.shippingAddress,
+        paymentMethod: cart.paymentMethod,
+        deliverytMethod: "Standard Delivery",
+        itemsPrice: cart.itemsPrice,
+        // shippingPrice: delivery,
+        taxPrice: cart.taxPrice,
+        isPaid: true,
+        totalPrice: totalAmount,
+        userEmail: userDetails.email,
+        userPhone: userDetails.phone,
+        userName: cart.shippingAddress.FullName,
+      };
+      dispatch(createOrder(order));
+      alert("success", "Your Order Placed Successfully");
+    } catch (error) {
+      alert("Oops !! Something went wrong !");
+      console.log(error);
+    }
   };
 
   //check pay option
   const [payOption, setPayOption] = useState(false);
+ const change = ()=>{
+  if (cart.paymentMethod === "Pay Now") {
+    setPayOption(true);
+  } else {
+    setPayOption(false);
+  }
+ }
+
   useEffect(() => {
-    if ((cart.paymentMethod = "Pay Now")) {
-      setPayOption(true);
-    } else {
-      setPayOption(false);
-    }
+    change();
+    console.log("payment>>>>", cart.paymentMethod);
+    console.log("uers>>>>>", userDetails);
+    console.log("cart", cart);
+    console.log(cart.cartItems);
+    console.log(cart.itemsPrice);
+    console.log('paymettode====>', cart.paymentMethod);
+    // if ((cart.paymentMethod = "Pay Now")) {
+    //   setPayOption(true);
+    // } else {
+    //   setPayOption(false);
+    // }
+    console.log(payOption);
   }, [cart.paymentMethod]);
 
   useEffect(() => {
@@ -53,7 +115,7 @@ export default function PlaceOrderScreen(props) {
     publicKey: "pk_live_265fed5585afd6975af072710503a8f9c385bef0",
   };
   const handlePaystackSuccessAction = (reference) => {
-    dispatch(createOrder({ ...cart, orderItems: cart.cartItems }));
+    placePaidOrderHandler();
     console.log(reference);
   };
 
@@ -82,10 +144,12 @@ export default function PlaceOrderScreen(props) {
               <div className="card card-body">
                 <h2>Shipping</h2>
                 <p>
-                  <strong>Name:</strong> {cart.shippingAddress.fullName} <br />
-                  <strong>Address: </strong> {cart.shippingAddress.address},
-                  {cart.shippingAddress.city}, {cart.shippingAddress.postalCode}
-                  ,{cart.shippingAddress.country}
+                  <strong>Name:</strong> {cart.shippingAddress.FullName} <br />
+                  <strong>email:</strong> {userDetails.email} <br />
+                  <strong>Address: </strong> {cart.shippingAddress.Street}{" "}
+                  street, {cart.shippingAddress.Bustop} bustop,{" "}
+                  {cart.shippingAddress.LGA} lga, {cart.shippingAddress.State}{" "}
+                  state, Nigeria
                 </p>
               </div>
             </li>
@@ -93,7 +157,7 @@ export default function PlaceOrderScreen(props) {
               <div className="card card-body">
                 <h2>Payment</h2>
                 <p>
-                  <strong>Method:</strong> {cart.paymentMethod}
+                  Method: <strong> {cart.paymentMethod}</strong>
                 </p>
               </div>
             </li>
@@ -149,7 +213,7 @@ export default function PlaceOrderScreen(props) {
               </li>
               <li>
                 <div className="row">
-                  <div>Tax</div>
+                  <div>Discount</div>
                   <div>₦{cart.taxPrice.toFixed(2)}</div>
                 </div>
               </li>

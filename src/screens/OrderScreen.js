@@ -128,7 +128,7 @@ export default function OrderScreen(props) {
                   {order.orderItems.map((item) => (
                     <li key={item.product}>
                       <hr />
-                      <div className="row">
+                      <div className="row" style={{display: 'flex', flexDirection: 'row'}}>
                         <div>
                           <img
                             src={item.image.url}
@@ -136,12 +136,11 @@ export default function OrderScreen(props) {
                             className="small"
                           ></img>
                         </div>
-                        <div className="min-30">
+                        <div className="">
                           <Link to={`/product/${item.product}`}>
                             {item.name}
                           </Link>
                         </div>
-
                         <div>
                           {item.qty} x ₦{item.price} = ₦{item.qty * item.price}
                         </div>
@@ -162,19 +161,19 @@ export default function OrderScreen(props) {
               <li>
                 <div className="row">
                   <div>Items</div>
-                  <div>₦{order.itemsPrice.toFixed(2)}</div>
+                  <div>₦{order.itemsPrice}</div>
                 </div>
               </li>
               <li>
                 <div className="row">
                   <div>Shipping</div>
-                  <div>₦{order.shippingPrice.toFixed(2)}</div>
+                  <div>₦{order.shippingPrice}</div>
                 </div>
               </li>
               <li>
                 <div className="row">
                   <div>Tax</div>
-                  <div>₦{order.taxPrice.toFixed(2)}</div>
+                  <div>₦{order.taxPrice}</div>
                 </div>
               </li>
               <li>
@@ -183,7 +182,7 @@ export default function OrderScreen(props) {
                     <strong> Order Total</strong>
                   </div>
                   <div>
-                    <strong>₦{order.totalPrice.toFixed(2)}</strong>
+                    <strong>₦{order.totalPrice}</strong>
                   </div>
                 </div>
               </li>

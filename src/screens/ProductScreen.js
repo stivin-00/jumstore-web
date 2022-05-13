@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { addToCart } from '../actions/cartActions';
 import { createReview, detailsProduct } from '../actions/productActions';
 import About from '../components/About';
 import LoadingBox from '../components/LoadingBox';
@@ -12,10 +13,12 @@ export default function ProductScreen(props) {
   const dispatch = useDispatch();
   const productId = props.match.params.id;
   const [qty, setQty] = useState(1);
+  const [size, setSize] = useState('xl');
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, product } = productDetails;
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
+  const bodySize = ['sm', 'md', 'lg', 'xl', 'xxl', 'xxxl'];
 
   const productReviewCreate = useSelector((state) => state.productReviewCreate);
   const {
@@ -37,7 +40,10 @@ export default function ProductScreen(props) {
     dispatch(detailsProduct(productId));
   }, [dispatch, productId, successReviewCreate]);
   const addToCartHandler = () => {
-    props.history.push(`/cart/${productId}?qty=${qty}`);
+    if (productId) {
+      dispatch(addToCart(productId, qty, size));
+    }
+    props.history.push(`/cart/${productId}?qty=${qty}?size=${size}`);
   };
   const submitHandler = (e) => {
     e.preventDefault();
@@ -110,7 +116,26 @@ export default function ProductScreen(props) {
                     <>
                       <li>
                         <div className="row">
-                          <div>Qty</div>
+                          <div>Select Size</div>
+                          <div>
+                            <select
+                              value={size}
+                              onChange={(e) => setSize(e.target.value)}
+                            >
+                              {bodySize.map(
+                                (x, index) => (
+                                  <option key={index} value={x}>
+                                    {x}
+                                  </option>
+                                )
+                              )}
+                            </select>
+                          </div>
+                        </div>
+                      </li>
+                      <li>
+                        <div className="row">
+                          <div>Select Qty</div>
                           <div>
                             <select
                               value={qty}

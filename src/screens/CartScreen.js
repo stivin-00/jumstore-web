@@ -7,17 +7,20 @@ import MessageBox from "../components/MessageBox";
 
 export default function CartScreen(props) {
   const productId = props.match.params.id;
+  const size = props.match.params.size;
   const qty = props.location.search
     ? Number(props.location.search.split("=")[1])
     : 1;
   const cart = useSelector((state) => state.cart);
   const { cartItems, error } = cart;
   const dispatch = useDispatch();
-  useEffect(() => {
-    if (productId) {
-      dispatch(addToCart(productId, qty));
-    }
-  }, [dispatch, productId, qty]);
+  const bodySize = ['sm', 'md', 'lg', 'xl', 'xxl', 'xxxl'];
+  // useEffect(() => {
+  //   console.log('cart variables', productId, qty, size)
+  //   if (productId) {
+  //     dispatch(addToCart(productId, qty));
+  //   }
+  // }, [dispatch, productId, qty]);
 
   const removeFromCartHandler = (id) => {
     // delete action
@@ -40,12 +43,13 @@ export default function CartScreen(props) {
               Cart is empty. <Link to="/">Go Shopping</Link>
             </MessageBox>
           ) : (
-            <div style={{ overflowX: "scroll" }}>
+            <div style={{ overflowX: "scroll" }} >
               <table className="table">
                 <thead>
                   <tr>
                     <th>IMAGE</th>
                     <th>NAME</th>
+                    <th>SIZE</th>
                     <th>QTY</th>
                     <th>PRICE</th>
                     <th>ACTION</th>
@@ -73,10 +77,28 @@ export default function CartScreen(props) {
                       <td>
                         <div>
                           <select
+                            value={item.size}
+                            onChange={(e) =>
+                              dispatch(
+                                addToCart(item.product, Number(item.qty), (e.target.value))
+                              )
+                            }
+                          >
+                            {bodySize.map((x, index) => (
+                              <option key={index} value={x}>
+                                {x}
+                              </option>
+                            ))}
+                          </select>
+                        </div>
+                      </td>
+                      <td>
+                        <div>
+                          <select
                             value={item.qty}
                             onChange={(e) =>
                               dispatch(
-                                addToCart(item.product, Number(e.target.value))
+                                addToCart(item.product, Number(e.target.value), item.size)
                               )
                             }
                           >

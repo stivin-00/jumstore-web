@@ -7,7 +7,7 @@ import {
   CART_ADD_ITEM_FAIL,
 } from '../constants/cartConstants';
 
-export const addToCart = (productId, qty) => async (dispatch, getState) => {
+export const addToCart = (productId, qty, size) => async (dispatch, getState) => {
   const { data } = await Axios.get(`https://jumstore-store.herokuapp.com/api/products/${productId}`);
   const {
     cart: { cartItems },
@@ -22,6 +22,7 @@ export const addToCart = (productId, qty) => async (dispatch, getState) => {
         countInStock: data.countInStock,
         product: data._id,
         qty,
+        size,
       },
     });
     localStorage.setItem(

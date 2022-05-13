@@ -1,26 +1,35 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { savePaymentMethod } from '../actions/cartActions';
-import About from '../components/About';
-import CheckoutSteps from '../components/CheckoutSteps';
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { savePaymentMethod } from "../actions/cartActions";
+import About from "../components/About";
+import CheckoutSteps from "../components/CheckoutSteps";
 
 export default function PaymentMethodScreen(props) {
   const cart = useSelector((state) => state.cart);
   const { shippingAddress } = cart;
-  if (!shippingAddress.address) {
-    props.history.push('/shipping');
-  }
-  const [paymentMethod, setPaymentMethod] = useState('Pay Now');
+  // if (!shippingAddress.address) {
+  //   props.history.push("/shipping");
+  // }
+  const [paymentMethod, setPaymentMethod] = useState("");
+  
+  useEffect(() => {
+    console.log(paymentMethod);
+  }, [paymentMethod]);
+
   const dispatch = useDispatch();
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(savePaymentMethod(paymentMethod));
-    props.history.push('/placeorder');
+    props.history.push("/placeorder");
   };
   return (
     <div>
       <CheckoutSteps step1 step2 step3></CheckoutSteps>
-      <form className="form card" onSubmit={submitHandler} style={{paddingBottom: '10px'}}>
+      <form
+        className="form card"
+        onSubmit={submitHandler}
+        style={{ paddingBottom: "10px" }}
+      >
         <div>
           <h1>Payment Method</h1>
         </div>
@@ -32,10 +41,10 @@ export default function PaymentMethodScreen(props) {
               value="Pay Now"
               name="paymentMethod"
               required
-              checked
+              // checked
               onChange={(e) => setPaymentMethod(e.target.value)}
             ></input>
-            <label htmlFor="paypal">Pay Now</label>
+            <label htmlFor="">Pay Now</label>
           </div>
         </div>
         <div>
@@ -48,7 +57,7 @@ export default function PaymentMethodScreen(props) {
               required
               onChange={(e) => setPaymentMethod(e.target.value)}
             ></input>
-            <label htmlFor="stripe">Pay On Delivery</label>
+            <label htmlFor="">Pay On Delivery</label>
           </div>
         </div>
         <div>
@@ -58,7 +67,7 @@ export default function PaymentMethodScreen(props) {
           </button>
         </div>
       </form>
-      <About/>
+      <About />
     </div>
   );
 }

@@ -7595,6 +7595,11 @@
   "resolved" "https://registry.npmjs.org/mute-stream/-/mute-stream-0.0.8.tgz"
   "version" "0.0.8"
 
+"naija-state-local-government@^1.1.2":
+  "integrity" "sha512-6ZHWKQ5FuKzphGs1axmKte33s9smipIpTa4q3crNYM8nLjiOjMpZhd0XCeGq8S2z0vJ3y+JdU0FXYNay0aSUJA=="
+  "resolved" "https://registry.npmjs.org/naija-state-local-government/-/naija-state-local-government-1.1.2.tgz"
+  "version" "1.1.2"
+
 "nanomatch@^1.2.9":
   "integrity" "sha512-fpoe2T0RbHwBTBUOftAfBPaDEi06ufaUai0mE6Yn1kacc3SnTErfb/h+X94VXzI64rKFHYImXSvdwGGCmwOqCA=="
   "resolved" "https://registry.npmjs.org/nanomatch/-/nanomatch-1.2.13.tgz"

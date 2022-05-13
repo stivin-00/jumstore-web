@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 import Hero from "../components/Hero";
 import About from "../components/About";
 import Features from "../components/Features";
+import Banner from "../components/Banner";
 
 export default function HomeScreen() {
   const dispatch = useDispatch();
@@ -66,6 +67,7 @@ export default function HomeScreen() {
           )}
         </div>
       </div>
+      <Banner />
       <div className="feature">
         <div className="feature-top">
           <h2>Best Selling</h2>

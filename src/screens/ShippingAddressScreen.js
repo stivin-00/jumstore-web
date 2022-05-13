@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { saveShippingAddress } from '../actions/cartActions';
-import About from '../components/About';
-import CheckoutSteps from '../components/CheckoutSteps';
+import React, { useState } from "react";
+import NaijaStates from "naija-state-local-government";
+import { useDispatch, useSelector } from "react-redux";
+import { saveShippingAddress } from "../actions/cartActions";
+import About from "../components/About";
+import CheckoutSteps from "../components/CheckoutSteps";
 
 export default function ShippingAddressScreen(props) {
   const userSignin = useSelector((state) => state.userSignin);
@@ -16,57 +17,39 @@ export default function ShippingAddressScreen(props) {
   const { address: addressMap } = userAddressMap;
 
   if (!userInfo) {
-    props.history.push('/signin');
+    props.history.push("/signin");
   }
+  const [state, setState] = useState("Lagos");
+  const [lga, setLga] = useState("");
+  const [bustop, setBustop] = useState("");
+  const [street, setStreet] = useState("");
   const [fullName, setFullName] = useState(shippingAddress.fullName);
-  const [address, setAddress] = useState(shippingAddress.address);
-  const [city, setCity] = useState(shippingAddress.city);
-  const [postalCode, setPostalCode] = useState(shippingAddress.postalCode);
-  const [country, setCountry] = useState(shippingAddress.country);
+  // const [address, setAddress] = useState(shippingAddress.address);
+  // const [city, setCity] = useState(shippingAddress.city);
+  // const [postalCode, setPostalCode] = useState(shippingAddress.postalCode);
+  // const [country, setCountry] = useState(shippingAddress.country);
   const dispatch = useDispatch();
+
   const submitHandler = (e) => {
     e.preventDefault();
-    const newLat = addressMap ? addressMap.lat : lat;
-    const newLng = addressMap ? addressMap.lng : lng;
-    if (addressMap) {
-      setLat(addressMap.lat);
-      setLng(addressMap.lng);
-    }
-    let moveOn = true;
-    if (!newLat || !newLng) {
-      moveOn = window.confirm(
-        'You did not set your location on map. Continue?'
-      );
-    }
-    if (moveOn) {
-      dispatch(
-        saveShippingAddress({
-          fullName,
-          address,
-          city,
-          postalCode,
-          country,
-          lat: newLat,
-          lng: newLng,
-        })
-      );
-      props.history.push('/payment');
+    console.log("address submitHandler");
+    if (!state || !lga || !bustop || !street || !fullName) {
+      alert("error", "please fill address completely");
+    } else {
+      let data = {
+        FullName: fullName,
+        State: state,
+        LGA: lga,
+        Bustop: bustop,
+        Street: street,
+      };
+      dispatch(saveShippingAddress(data));
+      console.log(data);
+
+      props.history.push("/payment");
     }
   };
-  const chooseOnMap = () => {
-    dispatch(
-      saveShippingAddress({
-        fullName,
-        address,
-        city,
-        postalCode,
-        country,
-        lat,
-        lng,
-      })
-    );
-    props.history.push('/map');
-  };
+
   return (
     <div>
       <CheckoutSteps step1 step2></CheckoutSteps>
@@ -86,55 +69,72 @@ export default function ShippingAddressScreen(props) {
           ></input>
         </div>
         <div>
-          <label htmlFor="address">Address</label>
+          <label htmlFor="address">State</label>
+          <select
+            value={state}
+            onChange={(e) => setState(e.target.value)}
+            required
+          >
+            {NaijaStates.states().map((x, index) => (
+              <option key={index} value={x}>
+                {x}
+              </option>
+            ))}
+          </select>
+          {/* <input
+            type="text"
+            id="state"
+            placeholder="Enter state"
+            value={state}
+            onChange={(e) => setState(e.target.value)}
+            required
+          ></input> */}
+        </div>
+        <div>
+          <label htmlFor="city">Lga</label>
+          <select
+            value={lga}
+            onChange={(e) => setLga(e.target.value)}
+            required
+          >
+            {NaijaStates.lgas(state).lgas.map((x, index) => (
+              <option key={index} value={x}>
+                {x}
+              </option>
+            ))}
+          </select>
+          {/* <input
+            type="text"
+            id="lga"
+            placeholder="Enter lga"
+            value={lga}
+            onChange={(e) => setLga(e.target.value)}
+            required
+          ></input> */}
+        </div>
+        <div>
+          <label htmlFor="postalCode">Bustop</label>
           <input
             type="text"
-            id="address"
-            placeholder="Enter address"
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
+            id="bustop"
+            placeholder="Enter bustop"
+            value={bustop}
+            onChange={(e) => setBustop(e.target.value)}
             required
           ></input>
         </div>
         <div>
-          <label htmlFor="city">City</label>
+          <label htmlFor="country">Street</label>
           <input
             type="text"
-            id="city"
-            placeholder="Enter city"
-            value={city}
-            onChange={(e) => setCity(e.target.value)}
+            id="street"
+            placeholder="Enter street"
+            value={street}
+            onChange={(e) => setStreet(e.target.value)}
             required
           ></input>
         </div>
-        <div>
-          <label htmlFor="postalCode">Postal Code</label>
-          <input
-            type="text"
-            id="postalCode"
-            placeholder="Enter postal code"
-            value={postalCode}
-            onChange={(e) => setPostalCode(e.target.value)}
-            required
-          ></input>
-        </div>
-        <div>
-          <label htmlFor="country">Country</label>
-          <input
-            type="text"
-            id="country"
-            placeholder="Enter country"
-            value={country}
-            onChange={(e) => setCountry(e.target.value)}
-            required
-          ></input>
-        </div>
-        <div>
-          <label htmlFor="chooseOnMap">Location</label>
-          <button type="button" onClick={chooseOnMap}>
-            Choose On Map
-          </button>
-        </div>
+
         <div>
           <label />
           <button className="primary" type="submit">
@@ -142,7 +142,7 @@ export default function ShippingAddressScreen(props) {
           </button>
         </div>
       </form>
-      <About/>
+      <About />
     </div>
   );
 }
