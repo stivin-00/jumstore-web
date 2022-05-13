@@ -60,7 +60,7 @@ export default function ProductListScreen(props) {
     dispatch(createProduct());
   };
   return (
-    <div>
+    <div className="page-drop">
       <div className="row">
         <h1>Products</h1>
         <button type="button" className="primary" onClick={createHandler}>

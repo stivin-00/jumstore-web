@@ -247,7 +247,7 @@ function App(props) {
                   <SearchBoxs history={history}></SearchBoxs>
                 )}
               ></Route>
-              <div className="head-category">
+              {/* <div className="head-category">
                 {categoriesList.map((item, index) => (
                   <Link
                     className="header-cat-item"
@@ -263,7 +263,7 @@ function App(props) {
                     <p>{item.label}</p>
                   </Link>
                 ))}
-              </div>
+              </div> */}
             </div>
           </div>
         </header>
@@ -412,7 +412,7 @@ function App(props) {
         </aside>
 
         <main>
-          <div className="navigation">
+          {/* <div className="navigation">
             <ul className="row">
               {categoriesList.map((items, index) => (
                 <Link
@@ -424,7 +424,7 @@ function App(props) {
                 </Link>
               ))}
             </ul>
-          </div>
+          </div> */}
           <Switch>
             <Route path="/cart/:id?" exact component={CartScreen}></Route>
             <Route path="/product/:id" component={ProductScreen} exact></Route>

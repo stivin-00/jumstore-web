@@ -56,7 +56,7 @@ export default function ProductScreen(props) {
     }
   };
   return (
-    <div>
+    <div className="page-drop">
       {loading ? (
         <LoadingBox></LoadingBox>
       ) : error ? (

@@ -23,7 +23,7 @@ export default function PaymentMethodScreen(props) {
     props.history.push("/placeorder");
   };
   return (
-    <div>
+    <div className="page-drop">
       <CheckoutSteps step1 step2 step3></CheckoutSteps>
       <form
         className="form card"

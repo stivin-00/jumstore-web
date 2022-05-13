@@ -161,7 +161,7 @@ export default function ProducCreateScreen(props) {
   };
 
   return (
-    <div>
+    <div className="page-drop">
       <form className="form" onSubmit={submitHandler}>
         <div>
           <h1>Create Product {productId}</h1>

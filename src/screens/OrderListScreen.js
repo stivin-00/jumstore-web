@@ -28,7 +28,7 @@ export default function OrderListScreen(props) {
     }
   };
   return (
-    <div>
+    <div className="page-drop">
       <h1>Orders</h1>
       {loadingDelete && <LoadingBox></LoadingBox>}
       {errorDelete && <MessageBox variant="danger">{errorDelete}</MessageBox>}

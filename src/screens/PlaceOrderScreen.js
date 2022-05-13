@@ -67,7 +67,7 @@ export default function PlaceOrderScreen(props) {
         userName: cart.shippingAddress.FullName,
       };
       dispatch(createOrder(order));
-      alert("success", "Your Order Placed Successfully");
+      alert("order placed successfully");
     } catch (error) {
       alert("Oops !! Something went wrong !");
       console.log(error);
@@ -76,13 +76,13 @@ export default function PlaceOrderScreen(props) {
 
   //check pay option
   const [payOption, setPayOption] = useState(false);
- const change = ()=>{
-  if (cart.paymentMethod === "Pay Now") {
-    setPayOption(true);
-  } else {
-    setPayOption(false);
-  }
- }
+  const change = () => {
+    if (cart.paymentMethod === "Pay Now") {
+      setPayOption(true);
+    } else {
+      setPayOption(false);
+    }
+  };
 
   useEffect(() => {
     change();
@@ -91,7 +91,7 @@ export default function PlaceOrderScreen(props) {
     console.log("cart", cart);
     console.log(cart.cartItems);
     console.log(cart.itemsPrice);
-    console.log('paymettode====>', cart.paymentMethod);
+    console.log("paymettode====>", cart.paymentMethod);
     // if ((cart.paymentMethod = "Pay Now")) {
     //   setPayOption(true);
     // } else {
@@ -135,7 +135,7 @@ export default function PlaceOrderScreen(props) {
   //paystack ends
 
   return (
-    <div>
+    <div className="page-drop">
       <CheckoutSteps step1 step2 step3 step4></CheckoutSteps>
       <div className="row top-order">
         <div className="coll">
@@ -168,7 +168,7 @@ export default function PlaceOrderScreen(props) {
                   {cart.cartItems.map((item) => (
                     <li key={item.product}>
                       <hr></hr>
-                      <div className="row">
+                      <div className="row order-items">
                         <div>
                           <img
                             src={item.image.url}
@@ -176,12 +176,14 @@ export default function PlaceOrderScreen(props) {
                             className="small"
                           ></img>
                         </div>
-                        <div className="min-30">
+                        <div className="">
                           <Link to={`/product/${item.product}`}>
                             {item.name}
                           </Link>
                         </div>
-
+                        <div>
+                          size: {item.size}
+                        </div>
                         <div>
                           {item.qty} x ₦{item.price} = ₦{item.qty * item.price}
                         </div>

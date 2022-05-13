@@ -31,7 +31,7 @@ export default function CartScreen(props) {
     props.history.push("/signin?redirect=shipping");
   };
   return (
-    <div>
+    <div className="page-drop">
       <h1>Shopping Cart</h1>
       <div className="row top-cart">
       

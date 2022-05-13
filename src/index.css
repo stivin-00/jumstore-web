@@ -40,6 +40,12 @@ header,
   color: #9292ce !important;
   justify-content: center;
   align-items: center;
+  -webkit-box-shadow: 0 3px 5px -3px #000;
+  -moz-box-shadow: 0 3px 5px -3px #000;
+  box-shadow: 0 3px 5px -3px #000;
+  padding-bottom: 1rem;
+  /* margin-bottom: 1rem; */
+
 }
 .second-header {
   display: none;
@@ -53,16 +59,16 @@ header,
 }
 main {
   grid-area: main;
-  padding: 1rem;
+  /* padding: 1rem; */
   margin-bottom: -8rem;
   /* background-color: #cbc3e3; */
 }
 .navigation {
   background-color: #4e0352;
   margin-bottom: 1rem;
-  /* margin-top: -1.1rem; */
-  margin-left: -1rem;
-  margin-right: -1rem;
+  width: 100%;
+  /* margin-left: -1rem; */
+  /* margin-right: -1rem; */
 }
 .navigation ul {
   display: grid;
@@ -726,6 +732,8 @@ button.close-sidebar {
   display: block;
 }
 .order-filter {
+  display: flex;
+  flex-direction: row;
   padding-bottom: 1rem;
   border-bottom: 5px solid #eee;
 }
@@ -736,9 +744,10 @@ button.close-sidebar {
 .home {
   display: flex;
   flex-direction: column;
-  padding: 1rem;
+  /* padding: 1rem; */
   margin: -1rem;
   margin-bottom: 1rem;
+  margin-top: 1rem;
   background-color: #cbc3e3;
   align-items: center;
   justify-content: center;
@@ -776,6 +785,10 @@ button.close-sidebar {
   min-width: 0;
   border-radius: 0 0 10px 10px;
   /* overflow-x: scroll; */
+}
+.order-items{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 3fr;
 }
 .produts-row {
   display: flex;
@@ -961,10 +974,11 @@ button.close-sidebar {
   justify-content: center;
 }
 .head-category {
-  display: flex;
+  display: none;
+  /* display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-evenly; */
 }
 .head-search {
   display: flex;
@@ -1041,6 +1055,30 @@ button.close-sidebar {
 .shop-texts{
   line-height: 40px;
 }
+.search-page{
+  margin-top: 1rem;
+}
+.category-name{
+  display:flex;
+  padding-top: .5rem;
+  padding-bottom: .5rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  box-shadow: -9px 1px 18px -9px rgba(122, 41, 41, 0.71);
+  -webkit-box-shadow: -9px 1px 18px -9px rgba(122, 41, 41, 0.71);
+  -moz-box-shadow: -9px 1px 18px -9px rgba(122, 41, 41, 0.71);
+}
+.category-name h1{
+  line-height:0;
+  text-transform: capitalize;
+}
+.category-name h6{
+  line-height: 0;
+  font-size: 10px !important;
+  margin-top: -.5rem;
+}
 
 /* '''''''''''' mobile header ends ......... */
 
@@ -1072,6 +1110,13 @@ button.close-sidebar {
   }
   .navigation {
     display: none;
+  }
+  .head-category {
+    display: flex;
+    background: #ffff;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
   }
   .feature {
     display: flex;
@@ -1132,7 +1177,12 @@ button.close-sidebar {
     line-height: 25px;
   }
 }
-
+/* page drop */
+@media only screen and (min-width: 576px) {
+.page-drop{
+  margin-top: 1.5rem;
+}
+}
 @media only screen and (max-width: 576px) {
   .home {
     display: flex;
@@ -1170,7 +1220,7 @@ button.close-sidebar {
     grid-area: header;
     background: #ffff;
     width: 100vw !important;
-    height: 11rem !important;
+    height: 8rem !important;
     justify-content: center;
     align-items: center;
     z-index: 9;
@@ -1179,6 +1229,19 @@ button.close-sidebar {
     -webkit-box-shadow: 0 3px 5px -3px #000;
     -moz-box-shadow: 0 3px 5px -3px #000;
     box-shadow: 0 3px 5px -3px #000;
+  }
+  .search-page{
+    margin-top: -5px;
+    width: 98vw!important;
+  }
+  .head-category {
+    display: flex;
+    background: #ffff;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-top: -3rem;
+    z-index: 18;
   }
   main {
     grid-area: main;
@@ -1195,7 +1258,8 @@ button.close-sidebar {
     display: none !important;
   }
   .sort-by {
-    transform: translateX(-40px);
+    margin-right: 2vw;
+    /* transform: translateX(-40px); */
   }
   .produts-row {
     /* width: auto;
@@ -1221,6 +1285,10 @@ button.close-sidebar {
   }
   .top-search {
     grid-template-columns: 1fr;
+    margin-top: -1rem; 
+    width: 95vw !important;
+    align-self: center;
+    
   }
   .product-card img {
     height: 12rem;
@@ -1250,7 +1318,7 @@ button.close-sidebar {
   .heer {
     border: none;
     padding: 0;
-    width: 95vw;
+    width: 100vw;
   }
   .single-slide {
     height: 200px;

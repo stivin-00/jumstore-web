@@ -8,8 +8,10 @@ import Product from "../components/Product";
 import Rating from "../components/Rating";
 import { prices, ratings } from "../utils";
 import { FaArrowDown, FaArrowUp } from "react-icons/fa";
+import { categoriesList } from "../utils/MockData";
 
 export default function SearchScreen(props) {
+  const [cat, setCat] = useState("");
   const [filterIsOpen, setFilterIsOpen] = useState(false);
   const {
     name = "all",
@@ -55,8 +57,34 @@ export default function SearchScreen(props) {
     return `/search/category/${filterCategory}/name/${filterName}/min/${filterMin}/max/${filterMax}/rating/${filterRating}/order/${sortOrder}/pageNumber/${filterPage}`;
   };
   return (
-    <div style={{ background: "#eee" }}>
-      <div className="row top-search" style={{ width: "98vw" }}>
+    <div style={{ background: "#eee" }} className="search-page">
+      <div className="navigation">
+        <ul className="row">
+          {categoriesList.map((items, index) => (
+            <Link
+              key={index}
+              onClick={() => setCat(items.label)}
+              to={`/search/category/${items.label}`}
+            >
+              <li
+                className={
+                  items.label === cat ? "active-link nav-item" : "nav-item"
+                }
+              >
+                {items.label}
+              </li>
+            </Link>
+          ))}
+        </ul>
+      </div>
+    <div className="category-name">
+      <h1>
+        {category}
+      </h1>
+      <h6>over 120 results</h6>
+    </div>
+
+      <div className="row top-search">
         <div className="col-1 heer mini-close" style={{ background: "white" }}>
           <h3 className="department">Filter</h3>
           <hr></hr>

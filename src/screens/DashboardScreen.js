@@ -13,7 +13,7 @@ export default function DashboardScreen() {
     dispatch(summaryOrder());
   }, [dispatch]);
   return (
-    <div>
+    <div className="page-drop">
       <div className="row">
         <h1>Dashboard</h1>
       </div>

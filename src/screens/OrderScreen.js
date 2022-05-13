@@ -80,7 +80,7 @@ export default function OrderScreen(props) {
   ) : error ? (
     <MessageBox variant="danger">{error}</MessageBox>
   ) : (
-    <div>
+    <div className="page-drop">
       <h1>Order {order._id}</h1>
       <div className="row top-order">
         <div className="coll">
@@ -92,7 +92,7 @@ export default function OrderScreen(props) {
                   <strong>Method:</strong> {order.deliverytMethod} <br />
                   <strong>Name:</strong> {order.userName} <br />
                   <strong>email:</strong> {order.userEmail} <br />
-                  <strong>phone:</strong> {order.userPhone} <br />
+                  <strong>phone:</strong> 0{order.userPhone} <br />
                   <strong>Address: </strong> {order.shippingAddress.Street},
                   {order.shippingAddress.Bustop}, {order.shippingAddress.LGA},
                   {order.shippingAddress.State}
@@ -128,7 +128,7 @@ export default function OrderScreen(props) {
                   {order.orderItems.map((item) => (
                     <li key={item.product}>
                       <hr />
-                      <div className="row" style={{display: 'flex', flexDirection: 'row'}}>
+                      <div className="row order-items">
                         <div>
                           <img
                             src={item.image.url}
@@ -138,8 +138,11 @@ export default function OrderScreen(props) {
                         </div>
                         <div className="">
                           <Link to={`/product/${item.product}`}>
-                            {item.name}
+                           {item.name}
                           </Link>
+                        </div>
+                        <div>
+                          size: {item.size}
                         </div>
                         <div>
                           {item.qty} x ₦{item.price} = ₦{item.qty * item.price}

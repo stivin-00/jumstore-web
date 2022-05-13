@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Scrollbars } from "react-custom-scrollbars";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
@@ -12,8 +12,10 @@ import Hero from "../components/Hero";
 import About from "../components/About";
 import Features from "../components/Features";
 import Banner from "../components/Banner";
+import { categoriesList } from "../utils/MockData";
 
 export default function HomeScreen() {
+  const [cat, setCat] = useState("");
   const dispatch = useDispatch();
   const productList = useSelector((state) => state.productList);
   const { loading, error, products } = productList;
@@ -27,6 +29,42 @@ export default function HomeScreen() {
   });
   return (
     <div className="home">
+      <div className="navigation">
+        <ul className="row">
+          {categoriesList.map((items, index) => (
+            <Link
+              key={index}
+              onClick={() => setCat(items.label)}
+              to={`/search/category/${items.label}`}
+            >
+              <li
+                className={
+                  items.label === cat ? "active-link nav-item" : "nav-item"
+                }
+              >
+                {items.label}
+              </li>
+            </Link>
+          ))}
+        </ul>
+      </div>
+      <div className="head-category" style={{width: "100vw" }}>
+        {categoriesList.map((item, index) => (
+          <Link
+            className="header-cat-item"
+            key={index}
+            to={`/search/category/${item.label}`}
+          >
+            <img
+              src={item.image}
+              alt="logo"
+              className="header-cat-img"
+              style={{ height: "20px", width: "20px" }}
+            />
+            <p>{item.label}</p>
+          </Link>
+        ))}
+      </div>
       <Hero />
       <Features />
       <div className="feature">
@@ -45,8 +83,8 @@ export default function HomeScreen() {
               )}
               <div>
                 <Scrollbars
-                // style={{height: '265px'}}
-                className='product-overflow'
+                  // style={{height: '265px'}}
+                  className="product-overflow"
                   autoHide
                   autoHideTimeout={1000}
                   autoHideDuration={200}
@@ -82,11 +120,10 @@ export default function HomeScreen() {
               {products.length === 0 && (
                 <MessageBox>No Product Found</MessageBox>
               )}
-              <div
-              >
+              <div>
                 <Scrollbars
-                // style={{height: '265px'}}
-                className='product-overflow'
+                  // style={{height: '265px'}}
+                  className="product-overflow"
                   autoHide
                   autoHideTimeout={1000}
                   autoHideDuration={200}
