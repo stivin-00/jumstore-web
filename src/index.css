@@ -753,7 +753,7 @@ button.close-sidebar {
   margin-bottom: 1rem;
   /* margin: 2rem; */
 }
-/* .feature::-webkit-scrollbar {    display: none;} */
+
 .feature-top {
   height: 3rem;
   display: flex;
@@ -779,10 +779,6 @@ button.close-sidebar {
 }
 .produts-row {
   display: flex;
-  /* flex-direction: row; */
-  /* overflow-x: scroll; */
-  /* overflow-x: scroll;
-  -webkit-overflow-scrolling: touch; */
 }
 .produts-all {
   display: flex;
