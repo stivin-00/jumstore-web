@@ -9,6 +9,7 @@ import Rating from "../components/Rating";
 import { prices, ratings } from "../utils";
 import { FaArrowDown, FaArrowUp } from "react-icons/fa";
 import { categoriesList } from "../utils/MockData";
+import LoadingProducts from "../components/LoadingProducts";
 
 export default function SearchScreen(props) {
   const [cat, setCat] = useState("");
@@ -231,7 +232,7 @@ export default function SearchScreen(props) {
           style={{ background: "white", paddingTop: "26px" }}
         >
           {loading ? (
-            <LoadingBox></LoadingBox>
+            <LoadingProducts/>
           ) : error ? (
             <MessageBox variant="danger">{error}</MessageBox>
           ) : (

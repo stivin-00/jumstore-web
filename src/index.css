@@ -1091,7 +1091,7 @@ button.close-sidebar {
 /* """"""""""""" loading component starts"""""""""""" */
 .is-loading{
   width: 20rem !important;
-  margin: .5rem;
+  margin: 1rem;
 }
 .loading-products{
 display: flex;
@@ -1120,9 +1120,11 @@ width: 100%;
   /* margin-top: 10px; */
   height: 4px;
   width: 50%;
+  line-height: 1px
 }
 .is-loading p {
   height: 10px;
+  line-height: 1px;
 }
 @keyframes shine {
   to {
@@ -1240,7 +1242,7 @@ width: 100%;
 
 
   .is-loading .image {
-    height: 100px;
+    height: 120px;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
     margin-bottom: 7px;
@@ -1249,13 +1251,16 @@ width: 100%;
     /* margin-top: 10px; */
     height: 3px;
     width: 60%;
+    margin: 8px 0;
   }
   .is-loading p {
     height: 8px;
+    line-height: 0;
+    margin: 8px 0;
   }
   .is-loading{
     width: 10rem !important;
-    margin: .3rem;
+    margin: 1rem;
   }
 
   /* loading */
