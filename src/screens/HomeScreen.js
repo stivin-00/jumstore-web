@@ -13,6 +13,7 @@ import About from "../components/About";
 import Features from "../components/Features";
 import Banner from "../components/Banner";
 import { categoriesList } from "../utils/MockData";
+import LoadingProducts from "../components/LoadingProducts";
 
 export default function HomeScreen() {
   const [cat, setCat] = useState("");
@@ -73,7 +74,20 @@ export default function HomeScreen() {
         </div>
         <div className="feature-bottom ">
           {loading ? (
-            <LoadingBox></LoadingBox>
+             <Scrollbars
+             // style={{height: '265px'}}
+             className="product-overflow"
+             autoHide
+             autoHideTimeout={1000}
+             autoHideDuration={200}
+             // autoHeight
+             // autoHeightMin={0}
+             // autoHeightMax={400}
+             thumbMinSize={30}
+             universal={true}
+           >
+            <LoadingProducts/>
+            </Scrollbars>
           ) : error ? (
             <MessageBox variant="danger">{error}</MessageBox>
           ) : (
@@ -112,7 +126,20 @@ export default function HomeScreen() {
         </div>
         <div className="feature-bottom ">
           {loading ? (
-            <LoadingBox></LoadingBox>
+             <Scrollbars
+             // style={{height: '265px'}}
+             className="product-overflow"
+             autoHide
+             autoHideTimeout={1000}
+             autoHideDuration={200}
+             // autoHeight
+             // autoHeightMin={0}
+             // autoHeightMax={400}
+             thumbMinSize={30}
+             universal={true}
+           >
+            <LoadingProducts/>
+            </Scrollbars>
           ) : error ? (
             <MessageBox variant="danger">{error}</MessageBox>
           ) : (
@@ -163,7 +190,7 @@ export default function HomeScreen() {
         </div>
         <div className="feature-bottom ">
           {loading ? (
-            <LoadingBox></LoadingBox>
+            <LoadingProducts/>
           ) : error ? (
             <MessageBox variant="danger">{error}</MessageBox>
           ) : (
