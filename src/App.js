@@ -138,11 +138,6 @@ function App(props) {
                       <Link
                         to="#signout"
                         onClick={signoutHandler}
-                        style={{
-                          color: "#660066",
-                          fontSize: "17px",
-                          fontWeight: "bold",
-                        }}
                       >
                         Sign Out
                       </Link>
