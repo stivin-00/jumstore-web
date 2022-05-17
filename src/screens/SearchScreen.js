@@ -82,7 +82,7 @@ export default function SearchScreen(props) {
       <h1>
         {category}
       </h1>
-      <h6>over 120 results</h6>
+      <h6>over 20 results</h6>
     </div>
 
       <div className="row top-search">

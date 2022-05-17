@@ -9,6 +9,7 @@ import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
 
 export default function PlaceOrderScreen(props) {
+  const [deliveryPrice, setDeliveryPrice] = useState(200);
   const cart = useSelector((state) => state.cart);
   if (!cart.paymentMethod) {
     props.history.push("/payment");
@@ -22,11 +23,98 @@ export default function PlaceOrderScreen(props) {
   );
   cart.shippingPrice = cart.itemsPrice > 100 ? toPrice(0) : toPrice(10);
   cart.taxPrice = toPrice(0.05 * cart.itemsPrice);
-  cart.totalPrice = cart.itemsPrice + cart.shippingPrice - cart.taxPrice;
+  cart.totalPrice = cart.itemsPrice + deliveryPrice - cart.taxPrice;
   const totalAmount =
-    (cart.itemsPrice + cart.shippingPrice - cart.taxPrice) * 100;
+    (cart.itemsPrice + deliveryPrice - cart.taxPrice) * 100;
   const dispatch = useDispatch();
+  
 
+  const { State, LGA, Bustop, Street } = cart.shippingAddress;
+
+
+  // shipping calculator
+
+  const getDeliveryPrice = () => {
+    if (State === 'Abia') {
+      setDeliveryPrice(3500);
+    } else {
+      if (State === 'Lagos') {
+        setDeliveryPrice(1500);
+      } else {
+        if (State === 'Oyo') {
+          setDeliveryPrice(2000);
+        } else {
+          if (State === 'Rivers') {
+            setDeliveryPrice(4000);
+          } else {
+            if (State === 'Ogun') {
+              setDeliveryPrice(2000);
+            } else {
+              if (State === 'Osun') {
+                setDeliveryPrice(3000);
+              } else {
+                if (State === 'Ondo') {
+                  setDeliveryPrice(3000);
+                } else {
+                  if (State === 'Ekiti') {
+                    setDeliveryPrice(3000);
+                  } else {
+                    if (State === 'Delta') {
+                      setDeliveryPrice(2500);
+                    } else {
+                      if (State === 'Edo') {
+                        setDeliveryPrice(2500);
+                      } else {
+                        if (State === 'Imo') {
+                          setDeliveryPrice(3500);
+                        } else {
+                          if (State === 'Enugu') {
+                            setDeliveryPrice(3500);
+                          } else {
+                            if (State === 'Anambra') {
+                              setDeliveryPrice(3500);
+                            } else {
+                              if (State === 'Ebonyi') {
+                                setDeliveryPrice(3500);
+                              } else {
+                                if (State === 'Akwa-Ibom') {
+                                  setDeliveryPrice(4000);
+                                } else {
+                                  if (State === 'Cross-River') {
+                                    setDeliveryPrice(4000);
+                                  } else {
+                                    if (State === 'Kogi') {
+                                      setDeliveryPrice(4500);
+                                    } else {
+                                      if (
+                                        State === 'Federal Capital Territory'
+                                      ) {
+                                        setDeliveryPrice(3000);
+                                      } else {
+                                        setDeliveryPrice(5000);
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  };
+
+
+
+  // shpping calculator
   const placeOrderHandler = () => {
     try {
       let order = {
@@ -35,7 +123,7 @@ export default function PlaceOrderScreen(props) {
         paymentMethod: cart.paymentMethod,
         deliverytMethod: "Standard Delivery",
         itemsPrice: cart.itemsPrice,
-        // shippingPrice: delivery,
+        shippingPrice: deliveryPrice,
         taxPrice: cart.taxPrice,
         isPaid: false,
         totalPrice: totalAmount,
@@ -58,7 +146,7 @@ export default function PlaceOrderScreen(props) {
         paymentMethod: cart.paymentMethod,
         deliverytMethod: "Standard Delivery",
         itemsPrice: cart.itemsPrice,
-        // shippingPrice: delivery,
+        shippingPrice: deliveryPrice,
         taxPrice: cart.taxPrice,
         isPaid: true,
         totalPrice: totalAmount,
@@ -86,6 +174,7 @@ export default function PlaceOrderScreen(props) {
 
   useEffect(() => {
     change();
+    getDeliveryPrice();
     console.log("payment>>>>", cart.paymentMethod);
     console.log("uers>>>>>", userDetails);
     console.log("cart", cart);
@@ -146,10 +235,8 @@ export default function PlaceOrderScreen(props) {
                 <p>
                   <strong>Name:</strong> {cart.shippingAddress.FullName} <br />
                   <strong>email:</strong> {userDetails.email} <br />
-                  <strong>Address: </strong> {cart.shippingAddress.Street}{" "}
-                  street, {cart.shippingAddress.Bustop} bustop,{" "}
-                  {cart.shippingAddress.LGA} lga, {cart.shippingAddress.State}{" "}
-                  state, Nigeria
+                  <strong>Address: </strong> {Street} street, {Bustop} bustop,{" "}
+                  {LGA} lga, {State} state, Nigeria
                 </p>
               </div>
             </li>
@@ -181,9 +268,7 @@ export default function PlaceOrderScreen(props) {
                             {item.name}
                           </Link>
                         </div>
-                        <div>
-                          size: {item.size}
-                        </div>
+                        <div>size: {item.size}</div>
                         <div>
                           {item.qty} x ₦{item.price} = ₦{item.qty * item.price}
                         </div>
@@ -210,7 +295,7 @@ export default function PlaceOrderScreen(props) {
               <li>
                 <div className="row">
                   <div>Shipping</div>
-                  <div>₦{cart.shippingPrice.toFixed(2)}</div>
+                  <div>₦{deliveryPrice.toFixed(2)}</div>
                 </div>
               </li>
               <li>

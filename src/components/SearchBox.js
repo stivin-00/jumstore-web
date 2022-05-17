@@ -15,7 +15,7 @@ export default function SearchBox(props) {
           id="q"
           onChange={(e) => setName(e.target.value)}
         ></input>
-        <button className="" type="submit" style={{marginRight: '-10px', backgroundColor: '#4E0352', color: '#FFFF'}}>
+        <button className="" type="submit" style={{marginRight: '-10px', backgroundColor: '#660066', color: '#FFFF'}}>
           <i className="fa fa-search"></i>
         </button>
       {/* </div> */}

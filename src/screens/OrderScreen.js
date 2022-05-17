@@ -117,7 +117,7 @@ export default function OrderScreen(props) {
                     Paid at {order.createdAt}
                   </MessageBox>
                 ) : (
-                  <MessageBox variant="danger">Not Paid</MessageBox>
+                  <MessageBox variant="danger">Not Paid {order.createdAt}</MessageBox>
                 )}
               </div>
             </li>
@@ -175,7 +175,7 @@ export default function OrderScreen(props) {
               </li>
               <li>
                 <div className="row">
-                  <div>Tax</div>
+                  <div>Discount</div>
                   <div>₦{order.taxPrice}</div>
                 </div>
               </li>

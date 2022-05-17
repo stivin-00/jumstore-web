@@ -76,7 +76,7 @@ function App(props) {
   return (
     <BrowserRouter>
       <div className="grid-container" style={{ margin: "0" }}>
-        <header className="row" style={{ color: "#4E0352" }}>
+        <header className="row" style={{ color: "#660066" }}>
           <div className="first-header row">
             <div>
               {/* <button
@@ -101,7 +101,7 @@ function App(props) {
               <Link
                 to="/cart"
                 style={{
-                  color: "#4E0352",
+                  color: "#660066",
                   fontSize: "17px",
                   fontWeight: "bold",
                   background: "#FBD0D0",
@@ -120,7 +120,7 @@ function App(props) {
                   <Link
                     to="#"
                     style={{
-                      color: "#4E0352",
+                      color: "#660066",
                       fontSize: "17px",
                       fontWeight: "bold",
                     }}
@@ -139,7 +139,7 @@ function App(props) {
                         to="#signout"
                         onClick={signoutHandler}
                         style={{
-                          color: "#4E0352",
+                          color: "#660066",
                           fontSize: "17px",
                           fontWeight: "bold",
                         }}
@@ -153,7 +153,7 @@ function App(props) {
                 <Link
                   to="/signin"
                   style={{
-                    color: "#4E0352",
+                    color: "#660066",
                     fontSize: "17px",
                     fontWeight: "bold",
                   }}
@@ -167,7 +167,7 @@ function App(props) {
                   <Link
                     to="#admin"
                     style={{
-                      color: "#4E0352",
+                      color: "#660066",
                       fontSize: "17px",
                       fontWeight: "bold",
                     }}
@@ -202,7 +202,7 @@ function App(props) {
               <i
                 className="fa fa-bars"
                 style={{
-                  color: "#4E0352",
+                  color: "#660066",
                   fontSize: "17px",
                   fontWeight: "bold",
                 }}
@@ -292,7 +292,7 @@ function App(props) {
             <li>
               <strong
                 style={{
-                  color: "#4E0352",
+                  color: "#660066",
                   fontSize: "18px",
                   fontWeight: "bold",
                 }}
@@ -310,13 +310,13 @@ function App(props) {
             {/* <li>
               <div></div>
             </li> */}
-            <hr style={{ background: "#4E0352", fontSize: "1px" }} />
+            <hr style={{ background: "#660066", fontSize: "1px" }} />
             <li>
               <div onClick={() => setMenubarIsOpen(false)}>
                 <Link
                   to="/cart"
                   style={{
-                    color: "#4E0352",
+                    color: "#660066",
                     fontSize: "13px",
                     fontWeight: "bold",
                   }}
@@ -328,7 +328,7 @@ function App(props) {
                 </Link>
               </div>
             </li>
-            <hr style={{ background: "#4E0352", fontSize: "1px" }} />
+            <hr style={{ background: "#660066", fontSize: "1px" }} />
             <li>
               <div onClick={() => setMenubarIsOpen(false)}>
                 {userInfo ? (
@@ -336,7 +336,7 @@ function App(props) {
                     <Link
                       to="#"
                       style={{
-                        color: "#4E0352",
+                        color: "#660066",
                         fontSize: "13px",
                         fontWeight: "bold",
                       }}
@@ -361,7 +361,7 @@ function App(props) {
                   <Link
                     to="/signin"
                     style={{
-                      color: "#4E0352",
+                      color: "#660066",
                       fontSize: "13px",
                       fontWeight: "bold",
                     }}
@@ -371,7 +371,7 @@ function App(props) {
                 )}
               </div>
             </li>
-            <hr style={{ background: "#4E0352", fontSize: "1px" }} />
+            <hr style={{ background: "#660066", fontSize: "1px" }} />
             {/* <li>
               <div onClick={() => setMenubarIsOpen(false)}></div>
             </li> */}
@@ -382,7 +382,7 @@ function App(props) {
                     <Link
                       to="#admin"
                       style={{
-                        color: "#4E0352",
+                        color: "#660066",
                         fontSize: "13px",
                         fontWeight: "bold",
                       }}
@@ -407,7 +407,7 @@ function App(props) {
                 )}
               </div>
             </li>
-            <hr style={{ background: "#4E0352", fontSize: "1px" }} />
+            <hr style={{ background: "#660066", fontSize: "1px" }} />
           </ul>
         </aside>
 
